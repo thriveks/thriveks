@@ -723,3 +723,67 @@ body {background:var(--paper);color:var(--ink);text-rendering:optimizeLegibility
  .assistant-launcher{padding:11px 14px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));font-size:12px;}
 }
 @media(prefers-reduced-motion:reduce){.directory-image img,.project-feature-image img,.quiet-project-visual-link img{transition:none;}}
+
+/* Digital IQ — approved neon artwork; featured technology partner */
+.quiet-featured-partner{
+  display:grid;
+  grid-template-columns:minmax(0,42%) minmax(0,1fr);
+  overflow:hidden;
+  min-height:186px;
+  margin:0 0 28px;
+  border:1px solid #d9e5e8;
+  border-radius:5px;
+  background:#fff;
+  color:#173747;
+  text-decoration:none;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+.quiet-featured-partner:hover,.quiet-featured-partner:focus-visible{
+  border-color:#80b6c9;
+  box-shadow:0 8px 28px #10395314;
+}
+.quiet-featured-partner-art{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  background:#020208;
+  padding:16px 20px;
+}
+.quiet-featured-partner-art img{
+  display:block;
+  width:100%;
+  max-height:175px;
+  object-fit:contain;
+}
+.quiet-featured-partner-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:11px;
+  padding:25px clamp(22px,3.5vw,42px);
+}
+.quiet-featured-partner-copy strong{
+  font-size:clamp(23px,2.8vw,34px);
+  letter-spacing:-.035em;
+}
+.quiet-featured-partner-desc{font-size:14px;line-height:1.6;color:#546a77}
+.quiet-featured-partner-link{
+  color:#0e637d;
+  font-size:13px;
+  font-weight:800;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.directory-image-digital-iq{background:#020208}
+.directory-image-digital-iq img{max-width:100%}
+@media(max-width:640px){
+  .quiet-featured-partner{grid-template-columns:1fr}
+  .quiet-featured-partner-art{min-height:154px;padding:15px}
+  .quiet-featured-partner-art img{max-height:132px}
+  .quiet-featured-partner-copy{padding:23px}
+}
+@media(prefers-reduced-motion:reduce){
+  .quiet-featured-partner{transition:none}
+}
