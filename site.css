@@ -570,7 +570,7 @@ body {background:var(--paper);color:var(--ink);text-rendering:optimizeLegibility
 .quiet-intro {padding:86px 0 0;background:radial-gradient(ellipse at 95% 3%,rgba(217,238,207,.50),transparent 40%),linear-gradient(#fbfcf8,#f5f9f5);}
 .quiet-intro-head {max-width:none;margin:0 0 49px;text-align:left;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:10px 70px;align-items:end;}
 .quiet-intro-head .quiet-kicker {grid-column:1/-1;color:#366757;letter-spacing:.17em;font-size:11px;}
-.quiet-intro-head h1 {margin:16px 0 0;font-size:clamp(56px,6.9vw,105px);font-weight:600;line-height:.98;letter-spacing:-.079em;color:#0c3448;}
+.quiet-intro-head h1 {margin:16px 0 0;font-size:clamp(49px,5.7vw,79px);font-weight:600;line-height:1.03;letter-spacing:-.072em;color:#0c3448;}
 .quiet-intro-head p {margin:0 0 7px;max-width:390px;font-size:clamp(17px,1.55vw,21px);line-height:1.55;color:#4c6470;}
 .quiet-banner {max-width:none;border:0;border-radius:16px;box-shadow:var(--shadow);background:#0e2d3f;}
 .quiet-banner img {width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;}
@@ -635,7 +635,7 @@ body {background:var(--paper);color:var(--ink);text-rendering:optimizeLegibility
 .footer-end {border-top-color:#365360;}
 @media(max-width:1100px){
  .quiet-intro-head {grid-template-columns:minmax(0,1.15fr) minmax(250px,.85fr);gap:20px 35px;}
- .quiet-intro-head h1 {font-size:clamp(51px,6.6vw,76px);}
+ .quiet-intro-head h1 {font-size:clamp(48px,5.5vw,72px);}
  .quiet-intro-bottom {grid-template-columns:1fr auto;gap:18px;}
  .quiet-intro-bottom p {grid-column:1/-1;}
  .quiet-project-info {padding:23px 22px 27px;}
