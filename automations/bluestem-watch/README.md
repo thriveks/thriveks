@@ -13,9 +13,12 @@ Configured November 3, 2026. **Staging research site only; not a replacement for
 ## Sources monitored
 1. Leavenworth County Commission agendas/minutes: https://files.leavenworthcounty.gov/government/county_commission/agenda.php — official, but returned HTTP 525 to Cloudflare Workers during setup.
 2. County Planning and Zoning schedule: https://files.leavenworthcounty.gov/departments/planning___zoning/schedule/index.php — official, but returned HTTP 525.
-3. Independent Leavenworth County public-meeting coverage: https://citizenportal.ai/feed/53898 — secondary lead only, returned HTTP 200.
-4. Developer newsroom: https://bluestemdatacenter.com/newsroom/ — developer statements, returned HTTP 200.
-5. Developer materials: https://bluestemdatacenter.com/materials/ — developer materials, returned HTTP 200.
+3. Official Leavenworth County YouTube meeting-recording feed: https://www.youtube.com/feeds/videos.xml?channel_id=UCIoaDlW1ch-QLR_HsaQMJQQ — official videos, returned HTTP 200.
+4. Independent Leavenworth County public-meeting coverage: https://citizenportal.ai/feed/53898 — secondary lead only, returned HTTP 200.
+5. Developer newsroom: https://bluestemdatacenter.com/newsroom/ — developer statements, returned HTTP 200.
+6. Developer materials: https://bluestemdatacenter.com/materials/ — developer materials, returned HTTP 200.
+
+The November 3 initial scan reached four of six collections; both County document-server endpoints remained unavailable (HTTP 525), while the official YouTube feed and three other collections were accessible.
 
 The source monitor calculates a digest of relevant links/listing content on successful checks and stores the timestamp when observed content changes. It **does not** infer that a public meeting approved, rejected, amended, or voted on a proposal. The browser displays publication links from the developer newsroom and displays source reachability and pending review. Full research summaries are retained as editorially dated historical records.
 
