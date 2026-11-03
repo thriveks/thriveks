@@ -64,7 +64,22 @@ async function inspect(source, old, now) {
     if (html.length < 200) throw new Error("Response unexpectedly short");
     const links = pickLinks(html,source.url);
     let observed;
-    if (source.id === "developer-newsroom") {
+    if (source.id === "county-video-feed") {
+      const videos = parseOfficialVideos(html);
+      if (!videos.length) throw new Error("No meeting videos found in official feed");
+      const priorIds = Array.isArray(old?.knownVideoIds) ? old.knownVideoIds : [];
+      const initialScan = !Array.isArray(old?.knownVideoIds);
+      const arrivals = initialScan ? [] : videos.filter(v => !priorIds.includes(v.id));
+      state.latestVideos = videos.slice(0, 12);
+      state.knownVideoIds = [...new Set([...videos.map(v => v.id), ...priorIds])].slice(0, 300);
+      const pending = Array.isArray(old?.pendingVideoReview) ? old.pendingVideoReview : [];
+      state.pendingVideoReview = [...arrivals.map(v => ({...v, firstDetectedAt:now, reviewStatus:"needs-transcript-screening"})), ...pending.filter(p => !arrivals.some(v => v.id === p.id))].slice(0, 80);
+      state.newVideoCount = arrivals.length;
+      state.reviewQueueCount = state.pendingVideoReview.length;
+      state.changeDetected = arrivals.length > 0;
+      if (arrivals.length > 0) state.lastChangedAt = now;
+      observed = videos.map(v => v.id + " " + v.title + " " + v.publishedAt).sort().join("|");
+    } else if (source.id === "developer-newsroom") {
       const listed = links.filter(l=>l.url.startsWith("https://bluestemdatacenter.com/") &&
          !/\/(newsroom|faqs|contact|materials|privacy-policy)\/?$/i.test(new URL(l.url).pathname) &&
          l.title.length > 13);
