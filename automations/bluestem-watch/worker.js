@@ -116,7 +116,7 @@ async function refresh(env) {
   const old = await env.SOURCE_STATE.get(KEY, "json") || {};
   const sources = await Promise.all(SOURCES.map(s => inspect(s, (old.sources || []).find(x=>x.id===s.id), now)));
   const data = {
-    schemaVersion:1,
+    schemaVersion:2,
     lastAttemptAt:now,
     lastSuccessfulCheckAt:sources.some(s=>s.checkStatus==="ok")?now:(old.lastSuccessfulCheckAt||null),
     sources,
@@ -140,7 +140,7 @@ export default {
     if (u.pathname !== "/status") return respond({error:"Not found"},404);
     try {
       let data=await env.SOURCE_STATE.get(KEY,"json");
-      if(!data || !Array.isArray(data.sources) || data.sources.length !== SOURCES.length) data=await refresh(env);
+      if(!data || data.schemaVersion !== 2 || !Array.isArray(data.sources) || data.sources.length !== SOURCES.length) data=await refresh(env);
       return respond(data);
     } catch(err) {
       return respond({error:"Source monitoring temporarily unavailable",detail:String(err?.message||err).slice(0,120)},503);
