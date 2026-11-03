@@ -1,6 +1,7 @@
 const SOURCES = [
   { id: "county-commission", label: "Leavenworth County Commission records", url: "https://files.leavenworthcounty.gov/government/county_commission/agenda.php", category: "County records" },
   { id: "county-planning", label: "County Planning and Zoning records", url: "https://files.leavenworthcounty.gov/departments/planning___zoning/schedule/index.php", category: "County records" },
+  { id: "county-video-feed", label: "Leavenworth County official meeting recordings", url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCIoaDlW1ch-QLR_HsaQMJQQ", category: "Official County video feed" },
   { id: "county-meetings-independent", label: "Leavenworth County meeting coverage (independent)", url: "https://citizenportal.ai/feed/53898", category: "Independent meeting coverage" },
   { id: "developer-newsroom", label: "Project Bluestem developer newsroom", url: "https://bluestemdatacenter.com/newsroom/", category: "Developer statements" },
   { id: "developer-materials", label: "Project Bluestem developer materials", url: "https://bluestemdatacenter.com/materials/", category: "Developer statements" }
@@ -42,7 +43,7 @@ async function inspect(source, old, now) {
     state.httpStatus = response.status;
     if (!response.ok) throw new Error("HTTP "+response.status);
     const type = response.headers.get("content-type") || "";
-    if (!/text\/html|application\/xhtml/i.test(type)) throw new Error("Unsupported response type");
+    if (!/text\/html|application\/xhtml|application\/xml|text\/xml|application\/atom\+xml/i.test(type)) throw new Error("Unsupported response type");
     const html = (await response.text()).slice(0,500000);
     if (html.length < 200) throw new Error("Response unexpectedly short");
     const links = pickLinks(html,source.url);
