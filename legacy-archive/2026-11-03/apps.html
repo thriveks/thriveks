@@ -1,0 +1,590 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>ThriveKS Apps</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root{
+      --bg:#050816;
+      --bg-soft:#0f172a;
+      --card:#0b1220;
+      --card-2:rgba(15,23,42,.82);
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --border:rgba(148,163,184,.18);
+      --accent:#22c55e;
+      --accent-2:#14b8a6;
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+      --radius:22px;
+      --pill:999px;
+      --max:1180px;
+      --font:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:var(--font);
+      background:
+        radial-gradient(circle at top, rgba(34,197,94,.10), transparent 28%),
+        radial-gradient(circle at right, rgba(20,184,166,.10), transparent 24%),
+        linear-gradient(180deg,#020617 0%, #08101f 100%);
+      color:var(--text);
+      line-height:1.6;
+      min-height:100vh;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px 20px 80px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:36px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#22c55e,#14b8a6);
+      box-shadow:0 18px 35px rgba(34,197,94,.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#02120b;
+      font-weight:900;
+      font-size:18px;
+    }
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+
+    .brand-text strong{
+      font-size:18px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .brand-text span{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .top-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .nav-link,
+    .btn{
+      border-radius:var(--pill);
+      padding:10px 16px;
+      font-size:14px;
+      font-weight:700;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+
+    .nav-link{
+      background:rgba(15,23,42,.7);
+      border:1px solid var(--border);
+      color:rgba(248,250,252,.9);
+      backdrop-filter:blur(10px);
+    }
+
+    .nav-link:hover{
+      background:rgba(15,23,42,.95);
+      color:#fff;
+    }
+
+    .btn{
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#02120b;
+      box-shadow:0 16px 34px rgba(34,197,94,.25);
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.04);
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:22px;
+      margin-bottom:38px;
+    }
+
+    .hero-main,
+    .hero-side{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg,rgba(15,23,42,.85),rgba(2,6,23,.92));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-main{
+      padding:34px 30px 30px;
+    }
+
+    .hero-main::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at top left, rgba(34,197,94,.13), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(20,184,166,.12), transparent 28%);
+      pointer-events:none;
+    }
+
+    .hero-main > *{position:relative;z-index:1}
+
+    .eyebrow{
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#cbd5e1;
+      margin-bottom:12px;
+    }
+
+    .hero-title{
+      font-size:clamp(34px,5vw,58px);
+      line-height:1.02;
+      font-weight:900;
+      letter-spacing:-.03em;
+      margin-bottom:14px;
+      max-width:11ch;
+    }
+
+    .hero-title span{
+      background:linear-gradient(135deg,#86efac,#5eead4);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .hero-copy{
+      max-width:64ch;
+      color:rgba(248,250,252,.82);
+      font-size:16px;
+      margin-bottom:20px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .hero-note{
+      font-size:13px;
+      color:var(--muted);
+      max-width:60ch;
+    }
+
+    .hero-side{
+      padding:24px 22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .hero-side h2{
+      font-size:20px;
+      line-height:1.1;
+      margin-bottom:12px;
+    }
+
+    .hero-side p{
+      color:rgba(248,250,252,.78);
+      font-size:14px;
+      margin-bottom:14px;
+    }
+
+    .mini-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .mini-list li{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(148,163,184,.12);
+      border-radius:16px;
+      padding:12px 14px;
+      font-size:14px;
+      color:#e2e8f0;
+    }
+
+    .section{
+      margin-bottom:42px;
+    }
+
+    .section-label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .section-title{
+      font-size:28px;
+      line-height:1.05;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin-bottom:20px;
+    }
+
+    .apps-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:20px;
+    }
+
+    .app-card{
+      background:linear-gradient(180deg,rgba(15,23,42,.92),rgba(2,6,23,.98));
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:22px 20px 20px;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+
+    .logo-box{
+      height:180px;
+      border-radius:20px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)),
+        rgba(2,6,23,.92);
+      border:1px solid rgba(148,163,184,.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      margin-bottom:18px;
+      overflow:hidden;
+    }
+
+    .logo-box img{
+      max-height:100%;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .app-name{
+      font-size:24px;
+      line-height:1.06;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin-bottom:8px;
+    }
+
+    .app-tag{
+      display:inline-flex;
+      align-self:flex-start;
+      margin-bottom:14px;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      background:rgba(34,197,94,.12);
+      color:#bbf7d0;
+      border:1px solid rgba(34,197,94,.18);
+    }
+
+    .app-copy{
+      color:rgba(248,250,252,.8);
+      font-size:14px;
+      margin-bottom:16px;
+    }
+
+    .feature-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:18px;
+    }
+
+    .feature-list li{
+      color:#e2e8f0;
+      font-size:14px;
+      padding-left:18px;
+      position:relative;
+    }
+
+    .feature-list li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.7em;
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#22c55e,#14b8a6);
+      transform:translateY(-50%);
+    }
+
+    .app-actions{
+      margin-top:auto;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .app-actions .btn,
+    .app-actions .nav-link{
+      font-size:13px;
+      padding:10px 14px;
+    }
+
+    .cta-band{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:center;
+      padding:24px 24px;
+      border-radius:24px;
+      border:1px solid var(--border);
+      background:linear-gradient(135deg,rgba(34,197,94,.10),rgba(20,184,166,.10)), rgba(15,23,42,.9);
+      box-shadow:var(--shadow);
+    }
+
+    .cta-band h3{
+      font-size:24px;
+      line-height:1.08;
+      margin-bottom:8px;
+      letter-spacing:-.02em;
+    }
+
+    .cta-band p{
+      color:rgba(248,250,252,.78);
+      max-width:60ch;
+      font-size:15px;
+    }
+
+    footer{
+      margin-top:38px;
+      padding-top:16px;
+      border-top:1px solid rgba(148,163,184,.12);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .apps-grid{grid-template-columns:1fr}
+      .cta-band{grid-template-columns:1fr}
+    }
+
+    @media (max-width:640px){
+      .page{padding:20px 14px 70px}
+      .hero-main{padding:24px 20px 22px}
+      .hero-title{max-width:none;font-size:34px}
+      .section-title{font-size:24px}
+      .logo-box{height:150px}
+      .app-name{font-size:22px}
+      .cta-band{padding:20px 18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a href="https://thriveks.com/" class="brand">
+        <div class="brand-mark">T</div>
+        <div class="brand-text">
+          <strong>ThriveKS</strong>
+          <span>Apps</span>
+        </div>
+      </a>
+
+      <nav class="top-nav">
+        <a href="https://thriveks.com/" class="nav-link">Home</a>
+        <a href="https://thriveks.com/business" class="nav-link">Business</a>
+        <a href="https://thriveks.com/sponsor" class="nav-link">Sponsor</a>
+        <a href="#apps" class="btn">Explore Apps</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-main">
+          <div class="eyebrow">Software by ThriveKS</div>
+          <h1 class="hero-title">Apps built to solve <span>real problems</span>.</h1>
+          <p class="hero-copy">
+            ThriveKS builds practical software with a clean user experience and a real-world purpose.
+            From home monitoring, to field operations, to local ordinance search, these apps are designed
+            to be useful, focused, and ready for the people who depend on them.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#apps" class="btn">View Our Apps</a>
+            <a href="mailto:dev@thriveks.com" class="nav-link">Contact ThriveKS</a>
+          </div>
+
+          <p class="hero-note">
+            Each product is built with usability, clarity, and long-term value in mind. This is software
+            meant to work in the real world, not just look good in a demo.
+          </p>
+        </div>
+
+        <aside class="hero-side">
+          <h2>Focused products. Clear outcomes.</h2>
+          <p>
+            Our current app lineup reflects a simple principle: build tools that make work easier,
+            information more accessible, and care more connected.
+          </p>
+
+          <ul class="mini-list">
+            <li><strong>Good Shepherd</strong> — home monitoring and care-focused visibility.</li>
+            <li><strong>WorkPilot</strong> — simple field operations and business management.</li>
+            <li><strong>Code Companion</strong> — fast local ordinance search and reference.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section" id="apps">
+        <div class="section-label">App lineup</div>
+        <h2 class="section-title">Three products. Three clear use cases.</h2>
+
+        <div class="apps-grid">
+          <article class="app-card">
+            <div class="logo-box">
+              <img src="https://thriveks.com/goodshepherd/goodshepherdlogo.png" alt="Good Shepherd logo">
+            </div>
+
+            <h3 class="app-name">Good Shepherd</h3>
+            <div class="app-tag">Home Monitoring</div>
+
+            <p class="app-copy">
+              A modern monitoring platform designed to support safer environments, better visibility,
+              and clearer response around home-based care and oversight.
+            </p>
+
+            <ul class="feature-list">
+              <li>Built for monitoring-focused use cases</li>
+              <li>Designed around visibility and awareness</li>
+              <li>Strong fit for care-driven environments</li>
+            </ul>
+
+            <div class="app-actions">
+              <a href="https://thriveks.com/goodshepherd/" class="btn">View App Site</a>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="logo-box">
+              <img src="https://thriveks.com/WorkPilot/WorkPilotSplashlogo.png" alt="WorkPilot logo">
+            </div>
+
+            <h3 class="app-name">WorkPilot</h3>
+            <div class="app-tag">Business Operations</div>
+
+            <p class="app-copy">
+              WorkPilot helps streamline day-to-day operations with a clean workflow built for service-based
+              businesses, teams in the field, and owners who need fast access to what matters.
+            </p>
+
+            <ul class="feature-list">
+              <li>Built for operational clarity</li>
+              <li>Supports real business workflows</li>
+              <li>Made to reduce friction in the field</li>
+            </ul>
+
+            <div class="app-actions">
+              <a href="https://thriveks.com/WorkPilot/home" class="btn">View App Site</a>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="logo-box">
+              <img src="https://thriveks.com/CodeCompanion/cityofleavenworthlogo.png" alt="Code Companion logo">
+            </div>
+
+            <h3 class="app-name">Code Companion</h3>
+            <div class="app-tag">Ordinance Search</div>
+
+            <p class="app-copy">
+              Code Companion makes it easier to search, review, and reference local ordinances without digging
+              through a confusing stack of documents and PDFs.
+            </p>
+
+            <ul class="feature-list">
+              <li>Fast ordinance lookup and reference</li>
+              <li>Built to simplify code access</li>
+              <li>Useful for residents, staff, and local stakeholders</li>
+            </ul>
+
+            <div class="app-actions">
+              <a href="https://thriveks.com/CodeCompanion/home" class="btn">View App Site</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="cta-band">
+          <div>
+            <h3>Interested in one of these apps?</h3>
+            <p>
+              Reach out to ThriveKS to ask about availability, partnerships, demos, or future deployment.
+              We are building software with practical value and strong presentation.
+            </p>
+          </div>
+
+          <a href="mailto:dev@thriveks.com?subject=ThriveKS%20Apps%20Inquiry" class="btn">Contact ThriveKS</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year">2026</span> ThriveKS</span>
+      <span>Software products built with real-world usability in mind.</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body></html>
