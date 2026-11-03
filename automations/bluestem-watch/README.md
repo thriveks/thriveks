@@ -33,3 +33,14 @@ A separate daily ChatGPT recurring watch reviews new findings against source doc
 - To pause monitoring, remove the Cron Trigger from this isolated Worker. Site history remains intact.
 - If dynamic endpoint fails, the website displays a fallback message, and the existing static researched record remains readable.
 - Check external website terms and technical availability before adding new monitored sources. Do not bypass access controls.
+
+## County meeting video → transcript review workflow
+- The official County YouTube Atom feed is indexed every six hours. The Worker saves `latestVideos` (video ID, title, publish time, video URL) and deduplicates against `knownVideoIds` in KV. Newly uploaded videos are added to `pendingVideoReview` with status `needs-transcript-screening`; a first scan establishes a baseline and does not announce older uploads as new.
+- The public Project Bluestem pages show latest videos in an expandable section, clearly described as recordings rather than transcripts. The monitor does **not** publish every meeting as a Bluestem event.
+- The separate daily ChatGPT watch screens new recordings for Bluestem relevance, then analyzes a *permitted* raw VTT or other sourced transcript when one is available. Preserve raw captions and cleaned text separately with meeting date, video ID, timestamps, source URL, hash/completeness where accessible. Verify names, figures and especially motion wording and roll-call votes against official video and posted minutes.
+- The YouTube Data API `captions.download` requires permission to edit the source video. A publicly accessible video is not an authorized third-party automatic-caption download. Do not presume access or silently build a scraper around that restriction.
+- Preferred next step for full hands-off transcription: obtain a County-provided caption/VTT or audio export, a documented authorized feed, or rights-cleared audio for independent speech recognition. Independent AI meeting services are useful *leads* and should be cross-checked, not silently recategorized as primary official transcripts.
+- When no permissible transcript exists, the watch can identify the meeting and request a transcript for manual import. This is a deliberate human fallback rather than pretending fully automated transcription has occurred.
+- `pendingVideoReview` retains up to 80 items until they are explicitly reconciled. The monitor does not currently implement a reviewed/cleared endpoint: do not represent the queue size as a count of verified Bluestem cases.
+
+Verified Nov. 3, 2026: the live County feed supplied video titles and IDs; the on-page expanded list rendered in Cloudflare staging; County document hosts continued returning HTTP 525.
