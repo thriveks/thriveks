@@ -26,18 +26,6 @@ function pickLinks(html, base) {
   }
   return Array.from(found.values()).slice(0,200);
 }
-function atomValue(entry, tag) {
-  const safe = tag.replace(/[.*+?^${}()|[\]\\]/g, "\\async function sha256(text) {");
-  const m = entry.match(new RegExp("<" + safe + ">([\\s\\S]*?)<\\/" + safe + ">", "i"));
-  return m ? m[1].replace(/&amp;/gi, "&").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&quot;/gi, '"').replace(/&#39;/gi, "'").trim() : "";
-}
-function youtubeVideos(xml) {
-  return [...xml.matchAll(/<entry>([\\s\\S]*?)<\\/entry>/gi)].map(m => {
-    const id = atomValue(m[1], "yt:videoId");
-    if (!/^[A-Za-z0-9_-]{11}$/.test(id)) return null;
-    return { id, title: atomValue(m[1], "title").slice(0, 180), publishedAt: atomValue(m[1], "published"), url: "https://www.youtube.com/watch?v=" + id };
-  }).filter(Boolean).slice(0, 20);
-}
 async function sha256(text) {
   const bytes = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", bytes);
@@ -60,22 +48,7 @@ async function inspect(source, old, now) {
     if (html.length < 200) throw new Error("Response unexpectedly short");
     const links = pickLinks(html,source.url);
     let observed;
-    if (source.id === "county-video-feed") {
-      const videos = youtubeVideos(html);
-      if (!videos.length) throw new Error("Official video feed returned no entries");
-      const priorIds = Array.isArray(old?.knownVideoIds) ? old.knownVideoIds : [];
-      const baseline = !Array.isArray(old?.knownVideoIds);
-      const newVideos = baseline ? [] : videos.filter(v => !priorIds.includes(v.id));
-      state.latestVideos = videos.slice(0, 12);
-      state.knownVideoIds = [...new Set([...videos.map(v => v.id), ...priorIds])].slice(0, 300);
-      const existing = Array.isArray(old?.pendingVideoReview) ? old.pendingVideoReview : [];
-      state.pendingVideoReview = [...newVideos.map(v=>({...v, firstDetectedAt:now, reviewStatus:"unreviewed"})), ...existing.filter(v => !newVideos.some(n=>n.id===v.id))].slice(0, 80);
-      state.newVideoCount = newVideos.length;
-      state.reviewQueueCount = state.pendingVideoReview.length;
-      state.changeDetected = newVideos.length > 0;
-      if (newVideos.length) state.lastChangedAt = now;
-      observed = videos.map(v => v.id + " " + v.title + " " + v.publishedAt).sort().join("\\n");
-    } else if (source.id === "developer-newsroom") {
+    if (source.id === "developer-newsroom") {
       const listed = links.filter(l=>l.url.startsWith("https://bluestemdatacenter.com/") &&
          !/\/(newsroom|faqs|contact|materials|privacy-policy)\/?$/i.test(new URL(l.url).pathname) &&
          l.title.length > 13);
@@ -93,14 +66,12 @@ async function inspect(source, old, now) {
     state.lastSuccessfulCheckAt = now;
     state.checkStatus = "ok";
     state.error = null;
-    if (source.id !== "county-video-feed") {
-      if (old?.digest && old.digest !== digest) {
-        state.lastChangedAt = now;
-        state.changeDetected = true;
-      } else if (!old?.digest) {
-        state.changeDetected = false;
-        state.lastChangedAt = null;
-      }
+    if (old?.digest && old.digest !== digest) {
+      state.lastChangedAt = now;
+      state.changeDetected = true;
+    } else if (!old?.digest) {
+      state.changeDetected = false;
+      state.lastChangedAt = null;
     }
     state.digest = digest;
   } catch(err) {
