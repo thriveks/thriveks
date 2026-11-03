@@ -1,0 +1,1282 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Thrive Local Foundation – Help Local Businesses Thrive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root{
+      --bg:#050816;
+      --bg-soft:#0f172a;
+      --accent:#22c55e;
+      --accent-soft:#4ade80;
+      --text-main:#f9fafb;
+      --text-muted:#9ca3af;
+      --card-bg:#020617;
+      --border-subtle:#1f2937;
+      --shadow-soft:0 18px 45px rgba(0,0,0,.35);
+      --radius-lg:18px;
+      --radius-pill:999px;
+      --font-main:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    a{color:inherit;text-decoration:none}
+
+    /* TOP NAV */
+    .top-nav{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .nav-link{
+      font-size:13px;
+      font-weight:700;
+      color:rgba(249,250,251,.85);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.25);
+      background:rgba(15,23,42,.55);
+      backdrop-filter:blur(8px);
+    }
+    .nav-link:hover{
+      background:rgba(15,23,42,.8);
+      color:#fff;
+    }
+
+    .nav-cta{
+      padding:8px 18px;
+      font-size:13px;
+    }
+
+    /* MOBILE NAV WRAP */
+    @media (max-width:640px){
+      .top-nav{gap:8px}
+      .nav-link{font-size:12px;padding:6px 9px}
+    }
+
+    /* ✅ FULL-SCREEN BACKGROUND VIDEO */
+    .bg-video{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
+      pointer-events:none;
+    }
+
+    /* ✅ Keep content above video */
+    .page{position:relative;z-index:1}
+
+    /* ✅ Readability tint above video, below content */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background:linear-gradient(180deg, rgba(3,7,18,0.22), rgba(15,23,42,0.28));
+      pointer-events:none;
+    }
+
+    body{
+      font-family:var(--font-main);
+      color:var(--text-main);
+      line-height:1.6;
+      min-height:100vh;
+
+      /* ✅ prevent “old background image” flash */
+      background-color:#020617;
+      background-image:none !important;
+      background-position:center center;
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-attachment:fixed;
+    }
+
+    .page{
+      max-width:1120px;
+      margin:0 auto;
+      padding:24px 20px 80px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:22px;
+    }
+
+    .logo-wrap{display:flex;align-items:center;gap:10px}
+    .site-logo{
+      height:50px;width:auto;display:block;border-radius:10px;
+      box-shadow:var(--shadow-soft);
+      background:rgba(2,6,23,0.45);
+    }
+
+    .brand-text{display:flex;flex-direction:column;gap:2px}
+    .brand-name{font-size:20px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .brand-tagline{font-size:12px;color:var(--text-muted);letter-spacing:.14em;text-transform:uppercase}
+
+    .btn-primary,.btn-ghost{
+      border-radius:var(--radius-pill);
+      padding:11px 22px;
+      font-size:14px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      cursor:pointer;
+      border:none;
+      white-space:nowrap;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,#22c55e,#14b8a6);
+      color:#020617;
+      box-shadow:0 16px 35px rgba(34,197,94,.35);
+    }
+
+    .btn-ghost{
+      background:rgba(15,23,42,.78);
+      color:var(--text-main);
+      border:1px solid rgba(148,163,184,.55);
+      backdrop-filter:blur(10px);
+    }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+      gap:22px;
+      align-items:stretch;
+      margin-bottom:34px;
+    }
+
+    .hero-left{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(31,41,55,.85);
+      box-shadow:var(--shadow-soft);
+      padding:22px 20px 20px;
+      background-position:center;
+      background-size:cover;
+    }
+
+    .hero-left::before{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(2,6,23,.58),rgba(2,6,23,.78));
+    }
+
+    .hero-left > *{position:relative;z-index:1}
+
+    .hero-eyebrow{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:rgba(249,250,251,.92);
+      margin-bottom:10px;
+    }
+
+    .hero-title{
+      font-size:clamp(32px,5vw,44px);
+      font-weight:900;
+      line-height:1.02;
+      margin-bottom:14px;
+      letter-spacing:-.01em;
+    }
+
+    .hero-title span{
+      background:linear-gradient(120deg,#22c55e,#2dd4bf);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .hero-subtitle{
+      font-size:15px;
+      color:rgba(249,250,251,.86);
+      max-width:640px;
+      margin-bottom:16px;
+    }
+
+    .hero-cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+
+    .hero-footnote{
+      font-size:12px;
+      color:rgba(249,250,251,.74);
+      max-width:660px;
+    }
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(55,65,81,.85);
+      box-shadow:var(--shadow-soft);
+      padding:18px 16px 16px;
+      background-position:center;
+      background-size:cover;
+      min-height:260px;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(2,6,23,.35),rgba(2,6,23,.86));
+    }
+
+    .hero-card-inner{position:relative;z-index:1}
+
+    .hero-card-title{font-size:15px;font-weight:850;margin-bottom:10px}
+    .hero-card-list{
+      list-style:none;
+      font-size:13px;
+      color:rgba(249,250,251,.86);
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+      margin-bottom:12px;
+    }
+    .hero-card-list li::before{content:"•";margin-right:8px;color:#86efac}
+    .hero-card-note{font-size:12px;color:rgba(249,250,251,.72)}
+
+    /* SECTION LABELS */
+    .section-label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+      margin-bottom:8px;
+    }
+    .section-title{
+      font-size:22px;
+      font-weight:900;
+      margin-bottom:18px;
+      letter-spacing:-.01em;
+    }
+
+    /* CARD GRID */
+    .uses-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-bottom:28px;
+    }
+
+    .card{
+      background:rgba(15,23,42,.90);
+      border-radius:var(--radius-lg);
+      padding:18px 16px 16px;
+      border:1px solid var(--border-subtle);
+      box-shadow:0 14px 34px rgba(0,0,0,.28);
+    }
+
+    .card-icon{
+      width:28px;height:28px;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      background:radial-gradient(circle at top,#22c55e 0,#16a34a 55%,#0f172a 100%);
+      margin-bottom:12px;
+      font-size:16px;
+      opacity:.95;
+    }
+
+    .card-title{font-size:15px;font-weight:850;margin-bottom:6px}
+    .card-body{font-size:13px;color:var(--text-muted)}
+
+    /* FEATURE PANELS */
+    .panel-grid{display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0 30px}
+
+    .panel{
+      position:relative;
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      border:1px solid rgba(31,41,55,.85);
+      box-shadow:var(--shadow-soft);
+      min-height:320px;
+      display:grid;
+      align-items:end;
+    }
+
+    .panel .bg{
+      position:absolute;inset:0;
+      background-size:cover;
+      background-position:center;
+      transform:scale(1.02);
+      filter:saturate(1.06) contrast(1.02);
+    }
+
+    .panel::after{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(2,6,23,.12),rgba(2,6,23,.90));
+    }
+
+    .panel .content{
+      position:relative;z-index:1;
+      padding:18px 18px 16px;
+      max-width:780px;
+    }
+
+    .panel .kicker{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:rgba(249,250,251,.86);
+      margin-bottom:8px;
+    }
+
+    .panel h3{
+      font-size:26px;
+      line-height:1.08;
+      margin-bottom:10px;
+      letter-spacing:-.01em;
+    }
+
+    .panel p{
+      color:rgba(249,250,251,.82);
+      font-size:14px;
+      margin-bottom:12px;
+      max-width:64ch;
+    }
+
+    .panel .actions{display:flex;gap:10px;flex-wrap:wrap}
+
+    /* DONATE */
+    .thrive-donate-section{
+      display:flex;
+      justify-content:center;
+      padding:22px 0;
+      background:transparent;
+      margin-bottom:10px;
+    }
+
+    .thrive-donate-box{
+      display:flex;
+      max-width:980px;
+      width:100%;
+      background:rgba(15,23,42,.96);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      box-shadow:var(--shadow-soft);
+      border:1px solid rgba(31,41,55,.9);
+    }
+
+    .thrive-donate-left,.thrive-donate-right{padding:22px 20px}
+    .thrive-donate-left{flex:1.2}
+
+    .thrive-donate-right{
+      flex:1;
+      position:relative;
+      background-position:center;
+      background-size:cover;
+      border-left:1px solid rgba(148,163,184,.35);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .thrive-donate-right::before{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(2,6,23,.55),rgba(2,6,23,.78));
+    }
+    .thrive-donate-right > *{position:relative;z-index:1}
+
+    .thrive-donate-logo{
+      max-width:120px;
+      margin-bottom:14px;
+      border-radius:12px;
+      box-shadow:0 14px 30px rgba(0,0,0,.25);
+    }
+
+    .thrive-donate-title{font-size:20px;font-weight:900;margin-bottom:8px}
+    .thrive-donate-text{font-size:14px;color:var(--text-muted)}
+
+    .thrive-donate-right h3{font-size:16px;margin-bottom:8px}
+    .thrive-donate-right p{font-size:13px;color:rgba(249,250,251,.78)}
+
+    .thrive-donate-btn{
+      margin-top:14px;
+      width:100%;
+      padding:12px 18px;
+      border-radius:var(--radius-pill);
+      border:none;
+      font-size:15px;
+      font-weight:900;
+      background:linear-gradient(135deg,#22c55e,#14b8a6);
+      color:#020617;
+      cursor:pointer;
+      box-shadow:0 16px 35px rgba(34,197,94,.35);
+    }
+    .thrive-donate-btn:hover{filter:brightness(1.06)}
+
+    /* VISUAL RAIL + MASONRY */
+    .visuals{margin-top:36px;margin-bottom:40px}
+
+    .visual-rail{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:minmax(220px,1fr);
+      gap:12px;
+      overflow-x:auto;
+      padding:10px;
+      border-radius:var(--radius-lg);
+      background:rgba(2,6,23,.55);
+      border:1px solid rgba(31,41,55,.85);
+      box-shadow:var(--shadow-soft);
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    .visual-rail::-webkit-scrollbar{height:10px}
+    .visual-rail::-webkit-scrollbar-thumb{background:rgba(148,163,184,.25);border-radius:999px}
+
+    .visual-card{
+      position:relative;
+      height:175px;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(31,41,55,.85);
+      scroll-snap-align:start;
+    }
+    .visual-card img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+    .visual-card::after{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(2,6,23,.08),rgba(2,6,23,.70));
+    }
+    .visual-card .cap{
+      position:absolute;left:12px;right:12px;bottom:10px;z-index:2;
+      font-size:12px;color:rgba(249,250,251,.92);
+      letter-spacing:.08em;text-transform:uppercase;
+    }
+
+    .masonry{margin-top:14px;columns:3 260px;column-gap:12px}
+    .masonry figure{
+      break-inside:avoid;
+      margin:0 0 12px;
+      border-radius:16px;
+      overflow:hidden;
+      background:rgba(15,23,42,.92);
+      border:1px solid rgba(31,41,55,.85);
+      box-shadow:0 14px 34px rgba(0,0,0,.35);
+    }
+    .masonry img{width:100%;height:auto;display:block}
+    .masonry figcaption{padding:10px 12px 12px;font-size:12px;color:var(--text-muted)}
+    
+        /* LEADERSHIP PREVIEW */
+    .leadership-preview{
+      margin:34px 0 40px;
+    }
+
+    .leadership-card{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:22px;
+      align-items:center;
+      background:rgba(15,23,42,.92);
+      border:1px solid var(--border-subtle);
+      border-radius:var(--radius-lg);
+      padding:20px;
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+
+    .leadership-image-wrap{
+      position:relative;
+    }
+
+    .leadership-image{
+      width:100%;
+      max-width:260px;
+      aspect-ratio:4/5;
+      object-fit:cover;
+      object-position:center top;
+      display:block;
+      border-radius:16px;
+      border:1px solid rgba(148,163,184,.22);
+      box-shadow:0 14px 34px rgba(0,0,0,.32);
+      background:#0f172a;
+    }
+
+    .leadership-content{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .leadership-name{
+      font-size:24px;
+      line-height:1.1;
+      font-weight:900;
+      letter-spacing:-.01em;
+      margin-bottom:6px;
+    }
+
+    .leadership-role{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--accent-soft);
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .leadership-bio{
+      font-size:14px;
+      color:rgba(249,250,251,.82);
+      margin-bottom:12px;
+      max-width:68ch;
+    }
+
+    .leadership-actions{
+      margin-top:4px;
+    }
+
+    /* PARTNERS */
+    .partners{margin:32px 0 40px}
+    .partners-intro{
+      max-width:640px;
+      font-size:13px;
+      color:var(--text-muted);
+      margin-bottom:14px;
+    }
+    .partners-grid{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+    .partner-logo{
+      height:120px;max-width:280px;object-fit:contain;
+      filter:brightness(1.1);
+      opacity:.85;
+      transition:opacity .2s ease, transform .2s ease;
+      background:rgba(15,23,42,.7);
+      border-radius:10px;
+      padding:8px 12px;
+      border:1px solid rgba(15,23,42,.9);
+    }
+    .partner-logo:hover{opacity:1;transform:translateY(-1px)}
+    .partners-grid.is-collapsed a:nth-child(n+7),
+    .partners-grid.is-collapsed img:nth-child(n+7){display:none}
+
+    .partners-toggle{
+      margin-top:14px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      color:var(--text-muted);
+      border:1px solid rgba(148,163,184,.35);
+      background:rgba(15,23,42,.7);
+      padding:8px 12px;
+      border-radius:var(--radius-pill);
+      cursor:pointer;
+    }
+
+    /* ✅ SQUARE CONNECT CARD (missing in your original) */
+    .thrive-oauth{margin:22px 0 34px}
+    .thrive-oauth-inner{display:flex;justify-content:center}
+    .thrive-oauth .card{max-width:980px;width:100%}
+    .thrive-oauth-cta-row{
+      margin-top:12px;
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .thrive-oauth-note{
+      font-size:12px;
+      color:rgba(249,250,251,.72);
+      max-width:52ch;
+      padding-top:4px;
+    }
+
+    /* CONTACT */
+    .contact{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+      gap:24px;
+      margin-bottom:10px;
+    }
+
+    form{
+      background:rgba(15,23,42,.95);
+      border-radius:var(--radius-lg);
+      border:1px solid var(--border-subtle);
+      padding:18px 18px 16px;
+    }
+
+    .field-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+    label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px}
+
+    input,textarea,select{
+      width:100%;
+      padding:9px 11px;
+      border-radius:9px;
+      border:1px solid rgba(55,65,81,.9);
+      background:#020617;
+      color:var(--text-main);
+      font-size:13px;
+      outline:none;
+    }
+    input:focus,textarea:focus,select:focus{
+      border-color:var(--accent-soft);
+      box-shadow:0 0 0 1px rgba(45,212,191,.4);
+    }
+    textarea{resize:vertical;min-height:90px}
+
+    .contact-hint{font-size:12px;color:var(--text-muted);margin-top:6px}
+
+    .contact-right{
+      font-size:13px;
+      color:var(--text-muted);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      justify-content:center;
+    }
+    .contact-right strong{color:var(--text-main)}
+
+    footer{
+      border-top:1px solid rgba(31,41,55,.9);
+      margin-top:28px;
+      padding-top:14px;
+      font-size:11px;
+      color:var(--text-muted);
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    /* RESPONSIVE */
+      @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .uses-grid,.contact{grid-template-columns:1fr}
+      .masonry{columns:2 220px}
+      .panel{min-height:300px}
+      .thrive-donate-box{flex-direction:column}
+      .thrive-donate-right{border-left:none;border-top:1px solid rgba(148,163,184,.35)}
+      .leadership-card{grid-template-columns:1fr}
+      .leadership-image{max-width:320px}
+    }
+
+       @media (max-width:520px){
+      .hero-title{font-size:30px}
+      .section-title{font-size:20px}
+      .site-logo{height:44px}
+      .partner-logo{height:80px;max-width:200px}
+      .masonry{columns:1}
+      .visual-card{height:155px}
+      .leadership-card{padding:16px}
+      .leadership-name{font-size:21px}
+      .leadership-bio{font-size:13px}
+    }
+
+    @media (max-width:768px){
+      body{
+        background-attachment:scroll;
+        background-position:top center;
+        background-size:cover;
+        background-repeat:no-repeat;
+      }
+    }
+
+    /* Mobile sticky donate button */
+    .mobile-donate{display:none}
+    @media (max-width:768px){
+      .mobile-donate{
+        position:fixed;
+        left:14px;right:14px;bottom:14px;
+        z-index:50;
+        display:flex;
+        justify-content:center;
+        pointer-events:none;
+      }
+      .mobile-donate a{
+        pointer-events:auto;
+        width:100%;
+        justify-content:center;
+      }
+      body{padding-bottom:72px}
+    }
+  </style>
+</head>
+<body style="background-image: none;">
+  <!-- ✅ BACKGROUND VIDEO -->
+  <video class="bg-video" autoplay="" loop="" muted="" playsinline="" preload="auto">
+    <source src="https://thriveks.com/websiteimagesandvideos/15070906_4094_2160_30fps.mp4" type="video/mp4">
+  </video>
+
+  <div class="page">
+    <header>
+      <div class="logo-wrap">
+        <img src="https://thriveks.neocities.org/Thrive/assets/landscapethrive.png" alt="ThriveKS Logo" class="site-logo">
+        <div class="brand-text">
+          <div class="brand-name">ThriveKS</div>
+          <div class="brand-tagline">Thrive Local Foundation</div>
+        </div>
+      </div>
+
+      <nav class="top-nav">
+        <a href="/business" class="nav-link">Business</a>
+        <a href="/sponsor" class="nav-link">Sponsor</a>
+        <a href="/volunteer" class="nav-link">Volunteer</a>
+        <a href="https://thriveks.com/apps" class="nav-link">Apps</a>
+        <a href="#donate" class="btn-primary nav-cta">Donate</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-left" id="hero-left" style="background-image: linear-gradient(rgba(2, 6, 23, 0.68), rgba(2, 6, 23, 0.76)), url(&quot;https://thriveks.com/websiteimagesandvideos/pexels-amina-filkins-5414327.jpg&quot;);">
+          <div class="hero-eyebrow">Nonprofit · Leavenworth, Kansas</div>
+
+          <h1 class="hero-title">Help local businesses <span>thrive</span></h1>
+
+          <p class="hero-subtitle">
+            Thrive Local Foundation is a 501(c)(3) focused on helping Leavenworth-area businesses get
+            the tools they need to grow — so young people can build their future right here at home.
+          </p>
+
+          <div class="hero-cta-row">
+            <a href="#donate" class="btn-primary"><span>Make a donation</span></a>
+            <a href="#contact" class="btn-ghost">I want to get involved</a>
+            <a href="business.html" class="btn-ghost">Business support</a>
+          </div>
+
+          <p class="hero-footnote">
+            We’re building the fundraising + partner pipeline now. Early support helps us set up infrastructure
+            that keeps opportunity, talent, and revenue in Leavenworth.
+          </p>
+        </div>
+
+        <aside class="hero-card" id="hero-card" aria-label="How your support helps" style="background-image: radial-gradient(circle at center top, rgba(17, 24, 39, 0.92) 0px, rgba(2, 6, 23, 0.92) 60%), url(&quot;https://thriveks.com/websiteimagesandvideos/pexels-tim-samuel-5838331.jpg&quot;);">
+          <div class="hero-card-inner">
+            <h2 class="hero-card-title">What your support makes possible:</h2>
+            <ul class="hero-card-list">
+              <li>Websites + digital setup for local small businesses.</li>
+              <li>Student-to-job pathways with real local employers.</li>
+              <li>Outreach to stabilize businesses at risk of closing.</li>
+            </ul>
+            <p class="hero-card-note">Start local. Build repeatable systems. Scale outcomes.</p>
+          </div>
+        </aside>
+      </section>
+
+      <!-- FEATURE PANELS -->
+      <section aria-label="Programs and outcomes">
+        <div class="section-label">Programs</div>
+        <h2 class="section-title">Outcome-driven support, built for real local traction.</h2>
+
+        <div class="panel-grid">
+          <article class="panel">
+            <div class="bg" data-img="pexels-amina-filkins-5414327.jpg" style="background-image: url(&quot;https://thriveks.com/websiteimagesandvideos/pexels-amina-filkins-5414327.jpg&quot;);"></div>
+            <div class="content">
+              <div class="kicker">Business enablement</div>
+              <h3>Websites, payments, automation — delivered fast.</h3>
+              <p>
+                We help local owners modernize without overwhelm: a clean site, checkout links, basic
+                automation, and a path to better operations.
+              </p>
+              <div class="actions">
+                <a class="btn-primary" href="business.html">See business support</a>
+                <a class="btn-ghost" href="#contact">Request help</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="bg" data-img="pexels-didsss-2675050.jpg" style="background-image: url(&quot;https://thriveks.com/websiteimagesandvideos/pexels-didsss-2675050.jpg&quot;);"></div>
+            <div class="content">
+              <div class="kicker">Youth + workforce</div>
+              <h3>Real projects that build modern skills locally.</h3>
+              <p>
+                We connect students and young adults to real local businesses for real deliverables:
+                websites, media, operations, and tech — tied to outcomes.
+              </p>
+              <div class="actions">
+                <a class="btn-primary" href="volunteer.html">Educators &amp; students</a>
+                <a class="btn-ghost" href="#contact">Partner with us</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="bg" data-img="pexels-tomfisk-31035423.jpg" style="background-image: url(&quot;https://thriveks.com/websiteimagesandvideos/pexels-tomfisk-31035423.jpg&quot;);"></div>
+            <div class="content">
+              <div class="kicker">Sponsors + donors</div>
+              <h3>Sponsor an outcome, not a vague promise.</h3>
+              <p>
+                Fund specific wins: one business website, one training cohort, one community project.
+                Transparent, local, and measurable.
+              </p>
+              <div class="actions">
+                <a class="btn-primary" href="sponsor.html">Sponsor an outcome</a>
+                <a class="btn-ghost" href="#donate">Donate now</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- DONATE SECTION -->
+      <section id="donate" class="thrive-donate-section">
+        <div class="thrive-donate-box">
+          <div class="thrive-donate-left">
+            <img src="https://thriveks.neocities.org/Thrive/assets/Thrive_Icon_512k.png" alt="Thrive Local Foundation" class="thrive-donate-logo">
+            <h2 class="thrive-donate-title">Support Thrive Local Foundation</h2>
+            <p class="thrive-donate-text">
+              Your donation supports youth advancement, small business development, and community growth projects
+              across Leavenworth, Kansas.
+            </p>
+          </div>
+
+          <div class="thrive-donate-right" id="donate-right" style="background-image: linear-gradient(rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.78)), url(&quot;https://thriveks.com/websiteimagesandvideos/pexels-che-yu-297995520-13412720.jpg&quot;);">
+            <h3>Secure online donation</h3>
+            <p>Choose any amount and donate securely through Square.</p>
+
+            <button class="thrive-donate-btn" onclick="window.location.href='https://square.link/u/CHBECj7R';">
+              Donate now
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW DONATIONS ARE USED -->
+      <section>
+        <div class="section-label">Where donations go</div>
+        <h2 class="section-title">You’re not just giving — you’re building infrastructure.</h2>
+
+        <div class="uses-grid">
+          <article class="card">
+            <div class="card-icon">🏪</div>
+            <h3 class="card-title">Direct business support</h3>
+            <p class="card-body">
+              Websites, Google Business setup, booking, and automation that saves time and drives revenue.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🎓</div>
+            <h3 class="card-title">Youth &amp; workforce</h3>
+            <p class="card-body">
+              Real projects with local employers so young people build modern skills here — not elsewhere.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🌱</div>
+            <h3 class="card-title">Community partnerships</h3>
+            <p class="card-body">
+              Alignment with schools, city leaders, and partners to bring training, systems, and funding in.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- OFFERS -->
+      <section style="margin-top:28px;">
+        <div class="section-label">Offers</div>
+        <h2 class="section-title">Choose the path that fits you.</h2>
+
+        <div class="uses-grid">
+          <article class="card">
+            <div class="card-icon">🏪</div>
+            <h3 class="card-title">Business owners</h3>
+            <p class="card-body">
+              Get set up with a modern website, payments, and basic automation—built to save time and drive revenue.
+            </p>
+            <div style="margin-top:12px;">
+              <a class="btn-primary" href="business.html">See business support</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🤝</div>
+            <h3 class="card-title">Sponsors &amp; donors</h3>
+            <p class="card-body">
+              Sponsor specific outcomes: a business website, student training, or a community growth project.
+            </p>
+            <div style="margin-top:12px;">
+              <a class="btn-primary" href="sponsor.html">Sponsor an outcome</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🎓</div>
+            <h3 class="card-title">Educators &amp; students</h3>
+            <p class="card-body">
+              Connect classrooms and young adults to real local projects with real businesses.
+            </p>
+            <div style="margin-top:12px;">
+              <a class="btn-primary" href="volunteer.html">Partner with us</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- COMMUNITY INFORMATION -->
+      <section style="margin-top:28px;">
+        <div class="section-label">Community information</div>
+        <h2 class="section-title">Public information for Leavenworth County residents.</h2>
+
+        <article class="card">
+          <div class="card-icon">🏗️</div>
+          <h3 class="card-title">Leavenworth County Data Center Information</h3>
+          <p class="card-body">
+            A neutral public information page summarizing local concerns, county discussions, and proposed regulatory responses related to data center development in Leavenworth County.
+          </p>
+          <div style="margin-top:12px;">
+            <a class="btn-primary" href="https://thriveks.com/leavenworth-county-data-center-information/">
+              View public information page
+            </a>
+          </div>
+        </article>
+      </section>
+      
+            <!-- LEADERSHIP PREVIEW -->
+      <section class="leadership-preview">
+        <div class="section-label">Leadership</div>
+        <h2 class="section-title">Built by local leadership with a long-term stake in Leavenworth.</h2>
+
+        <div class="leadership-card">
+          <div class="leadership-image-wrap">
+            <img src="founder1.png" alt="Jonathan Kesler, President and Founder of Thrive Local Foundation" class="leadership-image">
+          </div>
+
+          <div class="leadership-content">
+            <div class="leadership-name">Jonathan Kesler</div>
+            <div class="leadership-role">President &amp; Founder</div>
+
+            <p class="leadership-bio">
+              Jonathan Kesler is a Leavenworth entrepreneur, operator, and civic-minded leader focused on economic expansion, enterprise creation, and long-range opportunity for working families. As President and Founder of Thrive Local Foundation, he leads efforts centered on business development, operational systems, and place-based revitalization.
+            </p>
+
+            <p class="leadership-bio">
+              His background spans nonprofit leadership, company-building, workflow design, transportation service, and hands-on operations. He is focused on strengthening the conditions that allow families, employers, and local enterprise to stay and grow in Leavenworth.
+            </p>
+
+            <div class="leadership-actions">
+              <a href="board.html" class="btn-primary">Meet the board</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISUALS -->
+      <section class="visuals" aria-label="Thrive in the community">
+        <div class="section-label">In the community</div>
+        <h2 class="section-title">Momentum you can see.</h2>
+
+        <div class="visual-rail" aria-label="Highlight reel">
+          <div class="visual-card">
+            <img data-img="pexels-795059216-19893406.jpg" alt="Texture / momentum" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-795059216-19893406.jpg">
+            <div class="cap">Momentum</div>
+          </div>
+          <div class="visual-card">
+            <img data-img="pexels-tomfisk-31035423.jpg" alt="Downtown community" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-tomfisk-31035423.jpg">
+            <div class="cap">Downtown</div>
+          </div>
+          <div class="visual-card">
+            <img data-img="pexels-tim-samuel-5838331.jpg" alt="Collaboration" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-tim-samuel-5838331.jpg">
+            <div class="cap">Partnership</div>
+          </div>
+          <div class="visual-card">
+            <img data-img="pexels-pavel-danilyuk-8112204.jpg" alt="Planning and systems" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-pavel-danilyuk-8112204.jpg">
+            <div class="cap">Systems</div>
+          </div>
+          <div class="visual-card">
+            <img data-img="pexels-che-yu-297995520-13412720.jpg" alt="City at sunset" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-che-yu-297995520-13412720.jpg">
+            <div class="cap">Vision</div>
+          </div>
+          <div class="visual-card">
+            <img data-img="pexels-nathanielbgerhart-9537260.jpg" alt="Main street" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-nathanielbgerhart-9537260.jpg">
+            <div class="cap">Local</div>
+          </div>
+        </div>
+
+       <div class="masonry" aria-label="Gallery">
+  <figure>
+    <img data-img="pexels-amina-filkins-5414327.jpg" alt="Local business owner" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-amina-filkins-5414327.jpg">
+    <figcaption>Local owners get modern tools without the overwhelm.</figcaption>
+  </figure>
+
+  <figure>
+    <img data-img="pexels-didsss-2675050.jpg" alt="Classroom / youth" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-didsss-2675050.jpg">
+    <figcaption>Students build skills on real projects with real businesses.</figcaption>
+  </figure>
+
+  <figure>
+    <img data-img="pexels-tomfisk-31035423.jpg" alt="Downtown community" loading="lazy" src="https://thriveks.com/websiteimagesandvideos/pexels-tomfisk-31035423.jpg">
+    <figcaption>Keeping opportunity and commerce rooted locally.</figcaption>
+  </figure>
+</div>
+      </section>
+
+      <!-- PARTNER LOGOS -->
+      <section class="partners">
+        <div class="section-label">Partners</div>
+        <h2 class="section-title">Our early supporters &amp; collaborators.</h2>
+        <p class="partners-intro">
+          These are the organizations and businesses already leaning in to help build something bigger for Leavenworth.
+          As we add new partners, their logos will appear here.
+        </p>
+
+        <div id="partner-logos" class="partners-grid is-collapsed"><img src="https://thriveks.neocities.org/Thrive/partners/chamber-logo-1920w.jpg" alt="Partner logo" class="partner-logo"><a href="https://growlvcounty.org/" target="_blank" rel="noopener"><img src="https://thriveks.com/Thrive/partners/GLCwhitebackgroundVector%20(1).png" alt="Partner logo" class="partner-logo"></a><a href="https://bouncerockplay.com/" target="_blank" rel="noopener"><img src="https://thriveks.neocities.org/Thrive/partners/bouncerockplay.PNG" alt="Partner logo" class="partner-logo"></a><a href="https://thriveks.neocities.org/Thrive/theDive/thedive" target="_blank" rel="noopener"><img src="https://thriveks.neocities.org/Thrive/partners/Divelogo.JPG" alt="Partner logo" class="partner-logo"></a><img src="https://thriveks.neocities.org/Thrive/partners/KeslerFamilyInvestmentsnocontact.png" alt="Partner logo" class="partner-logo"><a href="https://thriveks.com/leavenworthclaw" target="_blank" rel="noopener"><img src="https://thriveks.neocities.org/Thrive/partners/LeavenworthClawLogo.png" alt="Partner logo" class="partner-logo"></a><img src="https://thriveks.neocities.org/Thrive/partners/LeavenworthLocalLogo.jpg" alt="Partner logo" class="partner-logo"><a href="https://thriveks.com/portal/dashboard" target="_blank" rel="noopener"><img src="https://thriveks.neocities.org/Thrive/partners/MTA_logo_final_under512kb.png" alt="Partner logo" class="partner-logo"></a><img src="https://thriveks.neocities.org/Thrive/partners/Roughandbumble.JPG" alt="Partner logo" class="partner-logo"><a href="https://thriveks.neocities.org/Thrive/THEREDHIBISCUSJUICECO/RedHibiscus" target="_blank" rel="noopener"><img src="https://thriveks.neocities.org/Thrive/partners/TheRedHibiscusJuiceCo.png" alt="Partner logo" class="partner-logo"></a><a href="https://thriveks.com/kansascityspiritfestival/home" target="_blank" rel="noopener"><img src="https://thriveks.com/kansascityspiritfestival/assets/kansascityspiritfestivallogo.png" alt="Partner logo" class="partner-logo"></a><a href="https://thriveks.com/midnightauto/home" target="_blank" rel="noopener"><img src="https://thriveks.com/midnightauto/photos/midnightautologo.png" alt="Partner logo" class="partner-logo"></a><a href="https://first-city-museum-review.thriveks.workers.dev/" target="_blank" rel="noopener"><img src="https://thriveks.com/first-city-museum/logo.png" alt="Partner logo" class="partner-logo"></a><a href="https://thriveks-bling-equals-dreams.pages.dev/" target="_blank" rel="noopener"><img src="https://thriveks.com/blingequalsdreams/bling-equals-dreams-logo-original.png" alt="Partner logo" class="partner-logo"></a><a href="https://7th-street-feast-demo.thriveks.workers.dev/" target="_blank" rel="noopener"><img src="https://thriveks.com/7thStreetFeast/7th-street-feast-logo.png" alt="Partner logo" class="partner-logo"></a></div>
+
+        <button id="partners-toggle" class="partners-toggle" type="button">View all partners</button>
+      </section>
+
+      <!-- SQUARE CONNECT CARD -->
+      <section class="thrive-oauth">
+        <div class="section-label">For local business owners</div>
+        <h2 class="section-title">Ready to link your Square account?</h2>
+
+        <div class="thrive-oauth-inner">
+          <article class="card">
+            <h3 class="card-title">Connect Square to ThriveKS</h3>
+            <p class="card-body">
+              Securely connect your Square business account so Thrive can generate checkout links for your offerings, automate key steps in your workflow, and help your business run more efficiently.
+            </p>
+
+            <div class="thrive-oauth-cta-row">
+              <a href="https://thriveks.neocities.org/Thrive/OAuth2" class="btn-primary">
+                Connect Square account
+              </a>
+              <p class="thrive-oauth-note">
+                For participating local businesses and partners. You’ll be taken to a secure Square authorization page.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-label">Stay in the loop</div>
+        <h2 class="section-title">Share how you’d like to help or be helped.</h2>
+
+        <div class="contact">
+          <form id="thrive-contact-form">
+            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+
+            <div class="field-row">
+              <div style="flex:1 1 160px;">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required="">
+              </div>
+              <div style="flex:1 1 160px;">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required="">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div style="flex:1 1 160px;">
+                <label for="role">I am a…</label>
+                <select id="role" name="role" required="">
+                  <option value="">Select one</option>
+                  <option value="business">Local business owner</option>
+                  <option value="donor">Potential donor / sponsor</option>
+                  <option value="educator">Educator / school partner</option>
+                  <option value="student">Student / young adult</option>
+                  <option value="community">Community member</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="message">How would you like to connect?</label>
+              <textarea id="message" name="message" placeholder="Example: I’d like to support financially, I run a local business that needs help, I’m a teacher interested in partnerships…" required=""></textarea>
+            </div>
+
+            <div style="margin-top:12px;">
+              <div id="form-status" style="display:none; margin-bottom:10px; font-size:13px;"></div>
+              <button type="submit" class="btn-primary">Submit</button>
+
+              <p class="contact-hint" style="margin-top:10px;">
+                This form doesn’t add you to a generic list. It lets us follow up personally as we launch programs.
+              </p>
+            </div>
+          </form>
+
+          <div class="contact-right">
+            <p>
+              Prefer to email directly? Reach out at <strong>dev@thriveks.com</strong> and share who you are and how you’d like to plug in.
+            </p>
+            <p>
+              Whether you’re a business owner, donor, teacher, student, or community member, we’d like to hear from you while we build this out.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year">2026</span> Thrive Local Foundation / ThriveKS.</span>
+      <span style="opacity:.85;">
+        Thrive Local Foundation is a federally recognized 501(c)(3) nonprofit organization. This page is an interim hub while full programs and funding portals are set up.
+      </span>
+    </footer>
+  </div>
+
+  <div class="mobile-donate">
+    <a href="#donate" class="btn-primary">Donate</a>
+  </div>
+  
+    <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // IMPORTANT:
+    // Your images are hosted here: https://thriveks.com/websiteimagesandvideos/pexels-... .jpg
+    const IMG_BASE = "https://thriveks.com/websiteimagesandvideos/";
+
+    // Robust image loader:
+    // - Tries .jpg first
+    // - If it fails, automatically tries .jpeg
+    function resolveImg(urlOrName) {
+      if (!urlOrName) return "";
+      if (/^https?:\/\//i.test(urlOrName)) return urlOrName;
+      return IMG_BASE + urlOrName;
+    }
+
+    function smartSetImg(imgEl, nameOrUrl) {
+      const base = resolveImg(nameOrUrl);
+      if (!base) return;
+
+      imgEl.src = base;
+
+      imgEl.onerror = function () {
+        const cur = imgEl.src || "";
+        if (cur.endsWith(".jpg")) {
+          imgEl.onerror = null;
+          imgEl.src = cur.replace(/\.jpg$/i, ".jpeg");
+        } else if (cur.endsWith(".jpeg")) {
+          imgEl.onerror = null;
+          imgEl.src = cur.replace(/\.jpeg$/i, ".jpg");
+        }
+      };
+    }
+
+    // ✅ IMPORTANT: Don't set a body background image anymore (video is the background)
+    document.body.style.backgroundImage = "none";
+
+    // Hero + donate background assignments
+    document.getElementById("hero-left").style.backgroundImage =
+      'linear-gradient(180deg, rgba(2,6,23,0.68), rgba(2,6,23,0.76)),' +
+      'url("' + resolveImg('pexels-amina-filkins-5414327.jpg') + '")';
+
+    document.getElementById("hero-card").style.backgroundImage =
+      'radial-gradient(circle at top, rgba(17,24,39,0.92) 0, rgba(2,6,23,0.92) 60%),' +
+      'url("' + resolveImg('pexels-tim-samuel-5838331.jpg') + '")';
+
+    document.getElementById("donate-right").style.backgroundImage =
+      'linear-gradient(180deg, rgba(2,6,23,0.60), rgba(2,6,23,0.78)),' +
+      'url("' + resolveImg('pexels-che-yu-297995520-13412720.jpg') + '")';
+
+    document.querySelectorAll(".panel .bg").forEach(bg => {
+      const imgName = bg.getAttribute("data-img");
+      bg.style.backgroundImage = 'url("' + resolveImg(imgName) + '")';
+    });
+
+    document.querySelectorAll("img[data-img]").forEach(img => {
+      smartSetImg(img, img.getAttribute("data-img"));
+    });
+
+    // Partners
+    (function () {
+      const partners = [
+        { src: "https://thriveks.neocities.org/Thrive/partners/chamber-logo-1920w.jpg", link: "" },
+         { src: "https://thriveks.com/Thrive/partners/GLCwhitebackgroundVector%20(1).png", link: "https://growlvcounty.org/" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/bouncerockplay.PNG", link: "https://bouncerockplay.com/" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/Divelogo.JPG", link: "https://thriveks.neocities.org/Thrive/theDive/thedive" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/KeslerFamilyInvestmentsnocontact.png", link: "" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/LeavenworthClawLogo.png", link: "https://thriveks.com/leavenworthclaw" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/LeavenworthLocalLogo.jpg", link: "" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/MTA_logo_final_under512kb.png", link: "https://thriveks.com/portal/dashboard" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/Roughandbumble.JPG", link: "" },
+        { src: "https://thriveks.neocities.org/Thrive/partners/TheRedHibiscusJuiceCo.png", link: "https://thriveks.neocities.org/Thrive/THEREDHIBISCUSJUICECO/RedHibiscus" },
+        { src: "https://thriveks.com/kansascityspiritfestival/assets/kansascityspiritfestivallogo.png", link: "https://thriveks.com/kansascityspiritfestival/home" },
+        { src: "https://thriveks.com/midnightauto/photos/midnightautologo.png", link: "https://thriveks.com/midnightauto/home" },
+        { src: "https://thriveks.com/first-city-museum/logo.png", link: "https://first-city-museum-review.thriveks.workers.dev/" },
+        { src: "https://thriveks.com/blingequalsdreams/bling-equals-dreams-logo-original.png", link: "https://thriveks-bling-equals-dreams.pages.dev/" },
+        { src: "https://thriveks.com/7thStreetFeast/7th-street-feast-logo.png", link: "https://7th-street-feast-demo.thriveks.workers.dev/" }
+      ];
+
+      const container = document.getElementById("partner-logos");
+      if (!container) return;
+
+      container.classList.add("is-collapsed");
+
+      partners.forEach(p => {
+        const img = document.createElement("img");
+        img.src = p.src;
+        img.alt = "Partner logo";
+        img.className = "partner-logo";
+
+        if (p.link) {
+          const a = document.createElement("a");
+          a.href = p.link;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.appendChild(img);
+          container.appendChild(a);
+        } else {
+          container.appendChild(img);
+        }
+      });
+
+      const toggle = document.getElementById("partners-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const collapsed = container.classList.toggle("is-collapsed");
+          toggle.textContent = collapsed ? "View all partners" : "Show fewer partners";
+        });
+      }
+    })();
+
+    // Contact form submit
+    (function () {
+      const form = document.getElementById("thrive-contact-form");
+      if (!form) return;
+
+      const statusBox = document.getElementById("form-status");
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        statusBox.style.display = "block";
+        statusBox.style.color = "#9ca3af";
+        statusBox.textContent = "Sending...";
+
+        const formData = new FormData(form);
+
+        try {
+          const res = await fetch(
+            "https://script.google.com/macros/s/AKfycbxfANFkxgRGS36hqPlwUp8s1h2UTq43RRQ4P6F9EM_AARm9Mx9AhGT09pKMP-t-CRp5pw/exec",
+            { method: "POST", body: formData }
+          );
+
+          const text = await res.text();
+
+          if (text.trim() === "ok") {
+            statusBox.style.color = "#22c55e";
+            statusBox.textContent = "Thanks — we received your message and will follow up personally.";
+            form.reset();
+          } else {
+            throw new Error("Bad response: " + text);
+          }
+        } catch (err) {
+          statusBox.style.color = "#ef4444";
+          statusBox.textContent = "Something went wrong. Please try again or email dev@thriveks.com.";
+        }
+      });
+    })();
+  </script>
+
+</body></html>
