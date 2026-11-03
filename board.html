@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Board of Directors | Thrive Local Foundation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root{
+      --bg:#050816;
+      --bg-soft:#0f172a;
+      --accent:#22c55e;
+      --accent-soft:#4ade80;
+      --text-main:#f9fafb;
+      --text-muted:#9ca3af;
+      --card-bg:#020617;
+      --border-subtle:#1f2937;
+      --shadow-soft:0 18px 45px rgba(0,0,0,.35);
+      --radius-lg:18px;
+      --radius-pill:999px;
+      --font-main:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    a{color:inherit;text-decoration:none}
+
+    body{
+      font-family:var(--font-main);
+      color:var(--text-main);
+      line-height:1.6;
+      min-height:100vh;
+      background:
+        linear-gradient(180deg, rgba(3,7,18,.92), rgba(15,23,42,.96));
+      background-color:#020617;
+    }
+
+    .page{
+      max-width:1120px;
+      margin:0 auto;
+      padding:24px 20px 80px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
+
+    .logo-wrap{display:flex;align-items:center;gap:10px}
+    .site-logo{
+      height:50px;
+      width:auto;
+      display:block;
+      border-radius:10px;
+      box-shadow:var(--shadow-soft);
+      background:rgba(2,6,23,0.45);
+    }
+
+    .brand-text{display:flex;flex-direction:column;gap:2px}
+    .brand-name{font-size:20px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .brand-tagline{font-size:12px;color:var(--text-muted);letter-spacing:.14em;text-transform:uppercase}
+
+    .top-nav{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .nav-link{
+      font-size:13px;
+      font-weight:700;
+      color:rgba(249,250,251,.85);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.25);
+      background:rgba(15,23,42,.55);
+      backdrop-filter:blur(8px);
+    }
+
+    .nav-link:hover{
+      background:rgba(15,23,42,.8);
+      color:#fff;
+    }
+
+    .hero{
+      margin-bottom:30px;
+      background:rgba(15,23,42,.82);
+      border:1px solid rgba(31,41,55,.9);
+      border-radius:var(--radius-lg);
+      padding:24px 22px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .eyebrow{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--text-muted);
+      margin-bottom:8px;
+    }
+
+    h1{
+      font-size:clamp(30px,5vw,42px);
+      line-height:1.05;
+      font-weight:900;
+      letter-spacing:-.01em;
+      margin-bottom:12px;
+    }
+
+    .hero p{
+      max-width:760px;
+      color:rgba(249,250,251,.82);
+      font-size:15px;
+    }
+
+    .board-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+      margin-bottom:28px;
+    }
+
+    .board-card{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:22px;
+      align-items:start;
+      background:rgba(15,23,42,.92);
+      border-radius:var(--radius-lg);
+      padding:20px;
+      border:1px solid var(--border-subtle);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .board-photo{
+      width:100%;
+      max-width:260px;
+      aspect-ratio:4/5;
+      object-fit:cover;
+      object-position:center top;
+      border-radius:16px;
+      display:block;
+      background:#0f172a;
+      border:1px solid rgba(148,163,184,.22);
+      box-shadow:0 14px 34px rgba(0,0,0,.32);
+    }
+
+    .board-photo-placeholder{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        linear-gradient(180deg, rgba(34,197,94,.18), rgba(15,23,42,.92)),
+        rgba(15,23,42,.95);
+      color:rgba(249,250,251,.88);
+      font-size:40px;
+      font-weight:900;
+      letter-spacing:.08em;
+    }
+
+    .board-name{
+      font-size:26px;
+      line-height:1.08;
+      font-weight:900;
+      margin-bottom:6px;
+      letter-spacing:-.01em;
+    }
+
+    .board-role{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--accent-soft);
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .board-bio{
+      font-size:14px;
+      color:rgba(249,250,251,.84);
+      margin-bottom:12px;
+      max-width:72ch;
+    }
+
+    .board-note{
+      font-size:13px;
+      color:var(--text-muted);
+    }
+
+    .governance{
+      background:rgba(15,23,42,.88);
+      border-radius:var(--radius-lg);
+      padding:20px;
+      border:1px solid var(--border-subtle);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .governance h2{
+      font-size:22px;
+      margin-bottom:10px;
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+
+    .governance p{
+      font-size:14px;
+      color:rgba(249,250,251,.82);
+      max-width:78ch;
+      margin-bottom:10px;
+    }
+
+    footer{
+      border-top:1px solid rgba(31,41,55,.9);
+      margin-top:28px;
+      padding-top:14px;
+      font-size:11px;
+      color:var(--text-muted);
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    @media (max-width:900px){
+      .board-card{grid-template-columns:1fr}
+      .board-photo{max-width:320px}
+    }
+
+    @media (max-width:640px){
+      .site-logo{height:44px}
+      .board-name{font-size:22px}
+      .board-bio{font-size:13px}
+      .hero{padding:20px 16px}
+      .board-card{padding:16px}
+      .governance{padding:16px}
+    }
+  </style>
+<meta name="robots" content="noindex,nofollow"></head>
+<body>
+  <div class="page"><p style="padding:10px 15px;background:#ecf1f5;color:#1a2a3b;border-radius:9px">Preserved historical Board of Directors page from the previous ThriveKS website. Membership details should be reconfirmed before production cutover. <a href="/about">Visit the new About page.</a></p>
+    <header>
+      <div class="logo-wrap">
+        <img src="https://thriveks.neocities.org/Thrive/assets/landscapethrive.png" alt="ThriveKS Logo" class="site-logo">
+        <div class="brand-text">
+          <div class="brand-name">ThriveKS</div>
+          <div class="brand-tagline">Thrive Local Foundation</div>
+        </div>
+      </div>
+
+      <nav class="top-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="business.html" class="nav-link">Business</a>
+        <a href="sponsor.html" class="nav-link">Sponsor</a>
+        <a href="volunteer.html" class="nav-link">Volunteer</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Leadership &amp; Governance</div>
+        <h1>Board of Directors</h1>
+        <p>
+          Thrive Local Foundation is led by a board committed to practical local progress, stronger businesses,
+          and long-term opportunity in Leavenworth. Our leadership is focused on execution, accountability,
+          and building systems that help local people and enterprises grow.
+        </p>
+      </section>
+
+      <section class="board-grid">
+        <article class="board-card">
+          <div>
+            <img src="founder1.png" alt="Jonathan Kesler, President and Founder of Thrive Local Foundation" class="board-photo">
+          </div>
+
+          <div>
+            <div class="board-name">Jonathan Kesler</div>
+            <div class="board-role">President &amp; Founder</div>
+
+            <p class="board-bio">
+              Jonathan Kesler is a Leavenworth entrepreneur, operator, and civic-minded leader focused on economic expansion, enterprise creation, and long-range opportunity for working families. As President and Founder of Thrive Local Foundation, he leads efforts centered on business development, operational systems, and place-based revitalization.
+            </p>
+
+            <p class="board-bio">
+              His background spans nonprofit leadership, company-building, workflow design, transportation service, and hands-on operations. He has built and managed ventures including ThriveKS Foundation, MTA Trading LLC, and Leavenworth Claw, while remaining active in Leavenworth’s civic and commercial environment through organizations such as Grow Leavenworth County and the Chamber of Commerce.
+            </p>
+
+            <p class="board-bio">
+              He is focused on strengthening the conditions that allow families, employers, and local enterprise to stay and grow in Leavenworth, Kansas.
+            </p>
+          </div>
+        </article>
+
+        <article class="board-card">
+          <div>
+            <img src="https://thriveks.com/boardmembers/rachelkesler.png" alt="Rachel Kelser, Vice President of Thrive Local Foundation" class="board-photo">
+          </div>
+
+          <div>
+            <div class="board-name">Rachel Kelser</div>
+            <div class="board-role">Vice President</div>
+
+            <p class="board-bio">
+              Rachel Kelser serves as Vice President of Thrive Local Foundation. As part of the board’s leadership team, she supports the organization’s mission to strengthen local business growth, expand opportunity, and help build long-term momentum for Leavenworth.
+            </p>
+
+            <p class="board-bio">
+              Her role includes supporting board direction, organizational development, and the practical work required to help Thrive grow into a durable local institution.
+            </p>
+
+            
+          </div>
+        </article>
+
+        <article class="board-card">
+          <div>
+            <img src="https://thriveks.com/boardmembers/allyallison.png" alt="Ally Allison, Secretary of Thrive Local Foundation" class="board-photo">
+          </div>
+
+          <div>
+            <div class="board-name">Ally Allison</div>
+            <div class="board-role">Secretary</div>
+
+            <p class="board-bio">
+              Ally Allison serves as Secretary of Thrive Local Foundation. She brings local business perspective and community connection to the board, helping support clear communication, organizational structure, and mission alignment.
+            </p>
+
+            <p class="board-bio">
+              Her leadership contributes to Thrive’s focus on practical local progress, strong community relationships, and building systems that support businesses and families in Leavenworth.
+            </p>
+
+            
+          </div>
+        </article>
+
+        <article class="board-card">
+          <div>
+            <img src="https://thriveks.com/boardmembers/reynaldorivera.png" alt="Reynaldo Rivera, Director of Thrive Local Foundation" class="board-photo">
+          </div>
+
+          <div>
+            <div class="board-name">Reynaldo Rivera</div>
+            <div class="board-role">Director</div>
+
+            <p class="board-bio">
+              Reynaldo Rivera serves as a Director of Thrive Local Foundation. He adds business and community perspective to the board and supports the organization’s mission to strengthen local opportunity, entrepreneurship, and long-term economic growth in Leavenworth.
+            </p>
+
+            <p class="board-bio">
+              As Thrive grows, his role helps reinforce the board’s commitment to practical execution, local partnership, and community-rooted development.
+            </p>
+
+            
+          </div>
+        </article>
+      </section>
+
+      <section class="governance">
+        <h2>Governance</h2>
+        <p>
+          Thrive Local Foundation is a federally recognized 501(c)(3) nonprofit organization focused on local business growth, youth opportunity, and long-term community development.
+        </p>
+        <p>
+          Thrive Local Foundation’s board brings together leadership perspectives rooted in entrepreneurship, operations, and community development. This page will continue to be updated as governance information expands.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year">2026</span> Thrive Local Foundation / ThriveKS.</span>
+      <span>Thrive Local Foundation is a federally recognized 501(c)(3) nonprofit organization.</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body></html>
