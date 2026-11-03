@@ -41,6 +41,19 @@ function render(data){
     txt(item,"small",msg);
     link(item,"Open source",s.url);
   });
+  var countyVideos=sources.find(function(s){return s.id==="county-video-feed";});
+  if(countyVideos&&Array.isArray(countyVideos.latestVideos)&&countyVideos.latestVideos.length){
+    var details=txt(host,"details","","source-watch-recordings");
+    txt(details,"summary","Latest official County meeting recordings (automatically indexed)");
+    var videos=txt(details,"ul","","source-watch-feed");
+    countyVideos.latestVideos.slice(0,8).forEach(function(video){
+      var line=txt(videos,"li","");
+      link(line,video.title||"County meeting recording",video.url);
+      txt(line,"small","Published "+date(video.publishedAt));
+    });
+    txt(details,"p","These are official video links, not verified transcripts. Meeting votes and speaker statements require reviewing the recording and checking any available captions or minutes.","source-watch-meta");
+    if(countyVideos.reviewQueueCount>0)txt(host,"p",countyVideos.reviewQueueCount+" new County recording(s) queued for transcript screening and verification.","source-watch-note");
+  }
   var developer=sources.find(function(s){return s.id==="developer-newsroom";});
   if(developer&&Array.isArray(developer.latestLinks)&&developer.latestLinks.length){
     txt(host,"h3","Developer newsroom: latest visible posts","source-watch-heading");
