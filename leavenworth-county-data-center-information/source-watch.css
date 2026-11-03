@@ -12,3 +12,7 @@
 .source-watch-feed li{margin:8px 0;line-height:1.45}
 .source-watch-feed small{display:block;color:#637065}
 @media(max-width:690px){.source-watch-grid{grid-template-columns:1fr}.source-watch-panel{padding:16px}}
+
+.source-watch-recordings{border-top:1px solid #d9d4c8;margin-top:20px;padding-top:15px}
+.source-watch-recordings summary{cursor:pointer;color:#245846;font-weight:800;font-size:.95rem}
+.source-watch-recordings[open] summary{margin-bottom:12px}
