@@ -62,3 +62,10 @@ _Updated November 3, 2026. Staging only. Do not switch the custom domain until t
 - Live browser-rendering check confirmed `/apps` loads three product cards and the correct WorkPilot App Store link.
 - Static route/link scan covered 19 published HTML pages and 446 anchor elements; no empty targets, missing known HTML pages or same-page fragment errors were found. This is a source-level check, **not** a full external destination/HTTP test.
 - Browser-rendering checks on the source-library page encountered rate limits; the deployed HTML and its 13 original PDF links were validated from the committed source.
+
+## Automatic Project Bluestem freshness layer (November 3)
+- Created Cloudflare Worker `thriveks-bluestem-watch` with a six-hour UTC Cron Trigger and KV-based source snapshot. Worker source is preserved in `automations/bluestem-watch/worker.js` with a deployment/rollback README.
+- The main Project Bluestem record and Source Library render live source-access status, last successful check, latest developer posts, and detected listing changes without overwriting the separately verified research chronology.
+- Monitoring currently reaches the developer newsroom, developer materials, and independent County meeting coverage; official County pages fail with HTTP 525 (SSL handshake), which is clearly disclosed to site visitors.
+- A separate daily Project Bluestem editorial watch exists to review meaningful developments and update **staging only** when independently verifiable; production domain not changed.
+- Ongoing source reliability and human review remain essential; no system can guarantee the public record is literally never out of date.
