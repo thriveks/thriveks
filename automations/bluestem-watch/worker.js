@@ -108,7 +108,7 @@ export default {
     if (u.pathname !== "/status") return respond({error:"Not found"},404);
     try {
       let data=await env.SOURCE_STATE.get(KEY,"json");
-      if(!data) data=await refresh(env);
+      if(!data || !Array.isArray(data.sources) || data.sources.length !== SOURCES.length) data=await refresh(env);
       return respond(data);
     } catch(err) {
       return respond({error:"Source monitoring temporarily unavailable",detail:String(err?.message||err).slice(0,120)},503);
