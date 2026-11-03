@@ -26,6 +26,22 @@ function pickLinks(html, base) {
   }
   return Array.from(found.values()).slice(0,200);
 }
+function readAtomTag(entry, key) {
+  const open = '<' + key + '>';
+  const close = '</' + key + '>';
+  const i = entry.indexOf(open);
+  if (i < 0) return '';
+  const j = entry.indexOf(close, i + open.length);
+  return j < 0 ? '' : entry.slice(i + open.length, j).replace(/&amp;/g, '&').trim();
+}
+function parseOfficialVideos(xml) {
+  return xml.split('<entry>').slice(1).map(chunk => {
+    const part = chunk.split('</entry>')[0];
+    const id = readAtomTag(part, 'yt:videoId');
+    if (id.length !== 11 || !/^[a-zA-Z0-9_-]+$/.test(id)) return null;
+    return {id, title:readAtomTag(part,'title'), publishedAt:readAtomTag(part,'published'), url:'https://www.youtube.com/watch?v=' + id};
+  }).filter(Boolean).slice(0, 20);
+}
 async function sha256(text) {
   const bytes = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", bytes);
