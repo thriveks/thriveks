@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>ThriveKS – Volunteer &amp; Partner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{
+      --accent:#22c55e; --accent-soft:#4ade80;
+      --text-main:#f9fafb; --text-muted:#9ca3af;
+      --border-subtle:#1f2937; --shadow-soft:0 18px 45px rgba(0,0,0,0.35);
+      --radius-lg:18px; --radius-pill:999px;
+      --font-main:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:var(--font-main);
+      color:var(--text-main);
+      line-height:1.6;
+      min-height:100vh;
+      background:
+        linear-gradient(180deg, rgba(3,7,18,0.65), rgba(15,23,42,0.80)),
+        url("https://thriveks.com/websiteimagesandvideos/pexels-didsss-2675050.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      background-color:#020617;
+    }
+    @media (max-width:768px){ body{background-attachment:scroll;} }
+    a{color:inherit;text-decoration:none}
+    .page{max-width:1120px;margin:0 auto;padding:24px 20px 70px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+    .logo-wrap{display:flex;align-items:center;gap:10px}
+    .site-logo{height:46px;border-radius:10px;box-shadow:var(--shadow-soft);background:rgba(2,6,23,0.35)}
+    .brand-text{display:flex;flex-direction:column;gap:2px}
+    .brand-name{font-size:18px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .brand-tagline{font-size:12px;color:var(--text-muted);letter-spacing:.14em;text-transform:uppercase}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+    .btn-primary,.btn-ghost{
+      border-radius:var(--radius-pill);
+      padding:10px 18px;
+      font-size:13px;
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      border:none;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#22c55e,#14b8a6);
+      color:#020617;
+      box-shadow:0 16px 35px rgba(34,197,94,0.35);
+    }
+    .btn-ghost{
+      background:rgba(15,23,42,0.78);
+      color:var(--text-main);
+      border:1px solid rgba(148,163,184,0.55);
+      backdrop-filter:blur(10px);
+    }
+
+    .panel{
+      background:rgba(2,6,23,0.75);
+      border:1px solid rgba(31,41,55,0.85);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+      padding:20px 18px;
+    }
+
+    .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(249,250,251,0.85);margin-bottom:8px}
+    h1{font-size:clamp(30px,5vw,40px);line-height:1.05;margin-bottom:10px;letter-spacing:-0.01em;font-weight:950}
+    h1 span{background:linear-gradient(120deg,#22c55e,#2dd4bf);-webkit-background-clip:text;color:transparent}
+    .sub{font-size:15px;color:rgba(249,250,251,0.82);margin-bottom:14px;max-width:64ch}
+    .small{font-size:13px;color:var(--text-muted)}
+
+    .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:14px}
+    .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+
+    .card{
+      background:rgba(15,23,42,0.90);
+      border:1px solid var(--border-subtle);
+      border-radius:var(--radius-lg);
+      box-shadow:0 14px 34px rgba(0,0,0,0.28);
+      padding:18px 16px;
+    }
+
+    .img{
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      border:1px solid rgba(31,41,55,0.85);
+      box-shadow:var(--shadow-soft);
+      background:#020617;
+      min-height:240px;
+    }
+    .img img{width:100%;height:100%;object-fit:cover;display:block}
+
+    footer{
+      border-top:1px solid rgba(31,41,55,0.9);
+      margin-top:26px;
+      padding-top:14px;
+      font-size:11px;
+      color:var(--text-muted);
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    @media (max-width:900px){
+      .grid2{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+    }
+  </style>
+<meta name="robots" content="noindex,nofollow"><meta name="description" content="Preserved ThriveKS community resource page, updated for the new website navigation."></head>
+<body>
+  <div class="page"><p style="padding:9px 15px;border:1px solid #536783;border-radius:10px;font-size:13px;margin:12px 0">Preserved community resource from the previous ThriveKS website. <a href="/work">Explore the new site</a> or <a href="/connect">contact ThriveKS</a>.</p>
+    <header>
+      <div class="logo-wrap">
+        <img src="https://thriveks.neocities.org/Thrive/assets/landscapethrive.png" class="site-logo" alt="ThriveKS Logo">
+        <div class="brand-text">
+          <div class="brand-name">ThriveKS</div>
+          <div class="brand-tagline">Volunteer &amp; Partner</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="btn-ghost" href="/">Home</a>
+        <a class="btn-ghost" href="/business">Business</a>
+        <a class="btn-ghost" href="/sponsor">Sponsor</a>
+        <a class="btn-primary" href="/connect">Get involved</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="kicker">Educators · Students · Community</div>
+        <h1>Build real skills with <span>real local projects</span></h1>
+        <p class="sub">
+          We connect people who want to help with businesses that need practical support. Not busywork — deliverables:
+          websites, content, operations, and simple systems that local owners can actually use.
+        </p>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+          <a class="btn-primary" href="/connect">Volunteer / partner form</a>
+          <a class="btn-ghost" href="/sponsor">Prefer to sponsor outcomes?</a>
+        </div>
+
+        <div class="grid3" aria-label="Ways to help">
+          <article class="card">
+            <div class="kicker">Mentorship</div>
+            <p class="small">Coach students or new volunteers through real deliverables for local businesses.</p>
+          </article>
+          <article class="card">
+            <div class="kicker">Project delivery</div>
+            <p class="small">Help build a website, write copy, shoot content, or simplify a workflow.</p>
+          </article>
+          <article class="card">
+            <div class="kicker">School partnerships</div>
+            <p class="small">Connect classrooms to local business needs for skill-building and outcomes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="grid2" style="margin-top:16px;">
+        <div class="img">
+          <img src="https://thriveks.com/websiteimagesandvideos/pexels-ron-lach-10646409.jpg" alt="Hands-on collaboration" loading="lazy">
+        </div>
+        <div class="card">
+          <div class="kicker">What volunteers actually do</div>
+          <p class="small">
+            We scope projects so they are clear, finishable, and useful to the business owner — then we assign the right people.
+          </p>
+          <div style="margin-top:10px;display:grid;gap:8px;">
+            <div class="small"><strong style="color:#f9fafb;">Examples:</strong> site refresh, Google profile setup, checkout links, intake form, media kit, basic automations.</div>
+            <div class="small">We keep the work modern, but the process simple.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid2" style="margin-top:14px;">
+        <div class="card">
+          <div class="kicker">Local-first</div>
+          <p class="small">
+            The goal is retention: keep opportunity and momentum in Leavenworth by building capability where people already live.
+          </p>
+        </div>
+        <div class="img">
+          <img src="https://thriveks.com/websiteimagesandvideos/pexels-seng-lam-ho-83494894-8844213.jpg" alt="Local community street" loading="lazy">
+        </div>
+      </section>
+
+      <section class="grid2" style="margin-top:14px;">
+        <div class="img">
+          <img src="https://thriveks.com/websiteimagesandvideos/pexels-brett-sayles-1000754.jpg" alt="Downtown commerce" loading="lazy">
+        </div>
+        <div class="card">
+          <div class="kicker">Ready to plug in?</div>
+          <p class="small">
+            Use the form on the home page and select your role. We’ll follow up with next steps and a short project menu.
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+            <a class="btn-primary" href="/connect">Start here</a>
+            <a class="btn-ghost" href="/">Back to home</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year">2026</span> ThriveKS.</span>
+      <span style="opacity:.85;">Volunteer partnerships coordinated through Thrive Local Foundation.</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body></html>
