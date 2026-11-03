@@ -54,3 +54,11 @@ _Updated November 3, 2026. Staging only. Do not switch the custom domain until t
 - [ ] Agree a precise rollback procedure and verify the prior public site remains accessible throughout the switch.
 - [ ] Remove staging-only noindex directives **only from the approved production deployment**; check canonical URLs, sitemap, SEO metadata and Search Console.
 - [ ] Obtain explicit approval for live `thriveks.com` cutover. **No production domain or mail configuration changes have been made.**
+
+## Staging build and static QA (November 3)
+- Cloudflare Pages deployment succeeded after updating `scripts/build.mjs` to include all preserved files.
+- Removed redundant `.html` 200 rewrites that caused redirect loops on clean URLs; Cloudflare Pages serves extensionless pages natively.
+- Live browser-rendering check confirmed `/leavenworth-county-data-center-information/` loads the new update and preserved May–August chronology.
+- Live browser-rendering check confirmed `/apps` loads three product cards and the correct WorkPilot App Store link.
+- Static route/link scan covered 19 published HTML pages and 446 anchor elements; no empty targets, missing known HTML pages or same-page fragment errors were found. This is a source-level check, **not** a full external destination/HTTP test.
+- Browser-rendering checks on the source-library page encountered rate limits; the deployed HTML and its 13 original PDF links were validated from the committed source.
