@@ -97,10 +97,10 @@ async function inspect(source, old, now) {
     state.lastSuccessfulCheckAt = now;
     state.checkStatus = "ok";
     state.error = null;
-    if (old?.digest && old.digest !== digest) {
+    if (source.id !== "county-video-feed" && old?.digest && old.digest !== digest) {
       state.lastChangedAt = now;
       state.changeDetected = true;
-    } else if (!old?.digest) {
+    } else if (source.id !== "county-video-feed" && !old?.digest) {
       state.changeDetected = false;
       state.lastChangedAt = null;
     }
