@@ -1,0 +1,14 @@
+
+.source-watch-panel{border:1px solid #d9d4c8;background:#fff;border-radius:20px;padding:23px}
+.source-watch-meta{font-size:.9rem;color:#42584b;margin:0 0 15px}
+.source-watch-note{font-size:.85rem;color:#66563d;background:#fff7e7;border:1px solid #e5d8b5;border-radius:11px;padding:12px 14px;margin-top:14px}
+.source-watch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.source-watch-source{background:#f8f7f2;border:1px solid #e6e2d9;border-radius:12px;padding:14px;min-width:0}
+.source-watch-source strong{display:block;font-size:.95rem;line-height:1.35}
+.source-watch-source small{display:block;color:#53665b;margin-top:5px;line-height:1.45}
+.source-watch-source a{display:inline-block;margin-top:8px;font-weight:700;font-size:.86rem;overflow-wrap:anywhere}
+.source-watch-heading{font-family:Georgia,serif;font-weight:700;font-size:1.12rem;margin:20px 0 10px}
+.source-watch-feed{margin:0;padding-left:22px}
+.source-watch-feed li{margin:8px 0;line-height:1.45}
+.source-watch-feed small{display:block;color:#637065}
+@media(max-width:690px){.source-watch-grid{grid-template-columns:1fr}.source-watch-panel{padding:16px}}
