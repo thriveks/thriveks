@@ -1,0 +1,781 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WorkPilot OS — iOS Operations Platform</title>
+  <meta name="description" content="WorkPilot OS is an iOS operations platform for structured execution: locations, service visits, expenses, reminders, and export-ready records.">
+
+  <!-- Open Graph / social -->
+  <meta property="og:title" content="WorkPilot OS — iOS Operations Platform">
+  <meta property="og:description" content="Structured execution for operators: locations, visits, expenses, reminders, and export-ready records.">
+  <meta property="og:image" content="https://thriveks.com/WorkPilot/WorkPilotSplashlogo.png">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0b1220">
+
+  <style>
+    :root{
+      --bg:#070a12;
+      --bg2:#0b1220;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(0,0,0,.30);
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(255,255,255,.18);
+      --text:#edf2ff;
+      --muted:rgba(237,242,255,.72);
+      --muted2:rgba(237,242,255,.60);
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 22px;
+      --max: 1120px;
+      --logo: url("https://thriveks.com/WorkPilot/WorkPilotSplashlogo.png");
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1000px 600px at 20% 10%, rgba(78,100,255,.18), transparent 60%),
+                  radial-gradient(900px 650px at 75% 90%, rgba(0,215,255,.14), transparent 60%),
+                  linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); border:0;
+    }
+
+    /* Background hero image (logo) */
+    .hero-bg{
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(ellipse at 30% 15%, rgba(78,100,255,.22), transparent 58%),
+    radial-gradient(ellipse at 70% 85%, rgba(0,215,255,.16), transparent 58%),
+    var(--logo);
+  background-size: cover;
+  background-position: center;
+  background-repeat:no-repeat;
+  filter: saturate(1.06) contrast(1.06);
+  transform: scale(1.03);
+  z-index:-2;
+}
+    .hero-veil{
+      position:fixed;
+      inset:-2px;
+      background:
+         linear-gradient(180deg, rgba(7,10,18,.35) 0%, rgba(7,10,18,.65) 60%, rgba(7,10,18,.80) 100%),
+    radial-gradient(ellipse at center, rgba(7,10,18,.05), rgba(7,10,18,.70));
+      z-index:-1;
+    }
+
+    /* Top bar */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(7,10,18,.55);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .brand .mark{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      flex:0 0 auto;
+    }
+    .brand .mark img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .brand .name{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .brand .name strong{
+      font-size:14px;
+      letter-spacing:.2px;
+      font-weight:800;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .name span{
+      font-size:12px;
+      color:var(--muted2);
+      font-weight:600;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size:13px;
+      font-weight:700;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid transparent;
+      color:var(--text);
+      transition: background .18s var(--ease), border-color .18s var(--ease), transform .12s var(--ease);
+    }
+    .nav a:hover{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      font-weight:800;
+      font-size:13px;
+      letter-spacing:.2px;
+      transition: transform .12s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      white-space:nowrap;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background: rgba(255,255,255,.14);
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover{
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.ghost{
+      background: rgba(0,0,0,.20);
+    }
+    .btn.ghost:hover{
+      background: rgba(0,0,0,.28);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:52px 0 34px;
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top:18px;
+    }
+    @media (max-width: 940px){
+      .hero{ padding:42px 0 28px; }
+      .hero-grid{ grid-template-columns:1fr; }
+    }
+
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      padding:24px 22px;
+      position:relative;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(ellipse at 20% 15%, rgba(78,100,255,.18), transparent 55%);
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.24);
+      color: var(--muted);
+      font-size:12.5px;
+      font-weight:800;
+      letter-spacing:.25px;
+      position:relative;
+      z-index:1;
+    }
+    .kdot{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(255,255,255,.28);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(34px, 4.6vw, 56px);
+      line-height:1.03;
+      letter-spacing:-.8px;
+      font-weight:900;
+      position:relative;
+      z-index:1;
+    }
+    .sub{
+      margin:0 0 18px;
+      max-width: 66ch;
+      color: var(--muted);
+      font-size: 16px;
+      line-height:1.6;
+      position:relative;
+      z-index:1;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .meta-row{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      color: var(--muted2);
+      font-size:12.5px;
+      font-weight:700;
+      position:relative;
+      z-index:1;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+    .pill svg{opacity:.85}
+
+    /* Right side cards */
+    .stack{
+      display:grid;
+      gap:14px;
+    }
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.30);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      padding:18px 18px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.2px;
+      font-weight:900;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size:13.5px;
+      line-height:1.55;
+    }
+    .list{
+      margin:12px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .list li{
+      display:flex;
+      gap:10px;
+      color: var(--muted);
+      font-size:13.5px;
+      line-height:1.45;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: rgba(255,255,255,.24);
+      border:1px solid rgba(255,255,255,.12);
+      margin-top:5px;
+      flex:0 0 auto;
+    }
+
+    /* Sections */
+    section{
+      padding:34px 0;
+    }
+    .section-title{
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.22px;
+      text-transform:uppercase;
+      color: rgba(237,242,255,.80);
+      margin:0 0 10px;
+    }
+    .section-lead{
+      margin:0 0 18px;
+      color: var(--muted);
+      font-size:15px;
+      line-height:1.65;
+      max-width: 78ch;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .grid3{grid-template-columns:1fr; } }
+
+    .feature{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: 0 16px 50px rgba(0,0,0,.38);
+      padding:18px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .feature::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(ellipse at 20% 10%, rgba(78,100,255,.12), transparent 60%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .feature h4{
+      margin:0 0 6px;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.2px;
+      position:relative;
+      z-index:1;
+    }
+    .feature p{
+      margin:0;
+      color: var(--muted);
+      font-size:13.5px;
+      line-height:1.55;
+      position:relative;
+      z-index:1;
+    }
+    .ico{
+      width:38px;height:38px;border-radius:14px;
+      display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      margin-bottom:10px;
+      position:relative;
+      z-index:1;
+    }
+
+    /* Download section */
+    .download{
+      border-radius: 26px;
+      border:1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(800px 420px at 20% 15%, rgba(78,100,255,.18), transparent 60%),
+        radial-gradient(700px 460px at 80% 90%, rgba(0,215,255,.14), transparent 60%),
+        rgba(0,0,0,.30);
+      box-shadow: var(--shadow);
+      padding:22px 20px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .download strong{
+      font-size:16px;
+      font-weight:950;
+      letter-spacing:-.2px;
+    }
+    .download span{
+      display:block;
+      color: var(--muted);
+      font-size:13.5px;
+      margin-top:4px;
+      line-height:1.45;
+      max-width:72ch;
+    }
+
+    .appstore-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.12);
+      font-weight:900;
+      letter-spacing:.2px;
+      transition: background .18s var(--ease), border-color .18s var(--ease), transform .12s var(--ease);
+      white-space:nowrap;
+    }
+    .appstore-badge:hover{
+      background: rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,.22);
+    }
+    .appstore-badge:active{ transform: translateY(1px); }
+
+    /* Footer */
+    footer{
+      padding:28px 0 32px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color: rgba(237,242,255,.62);
+      font-size:12px;
+    }
+    footer .foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    footer a{
+      color: rgba(237,242,255,.80);
+      border-bottom:1px solid rgba(237,242,255,.18);
+    }
+    footer a:hover{ border-bottom-color: rgba(237,242,255,.40); }
+
+    /* Tiny animation (safe + subtle) */
+    @media (prefers-reduced-motion: no-preference){
+      .panel, .card, .feature, .download{
+        animation: floatIn .55s var(--ease) both;
+      }
+      @keyframes floatIn{
+        from{opacity:0; transform: translateY(10px);}
+        to{opacity:1; transform: translateY(0);}
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">
+          <img src="https://thriveks.com/WorkPilot/WorkPilotSplashlogo.png" alt="">
+        </div>
+        <div class="name">
+          <strong>WorkPilot OS</strong>
+          <span>iOS operations platform</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#what">What it does</a>
+        <a href="#who">Who it’s for</a>
+        <a href="#why">Why it’s different</a>
+        <a href="#download" class="btn ghost">Download</a>
+        <a href="https://thriveks.com/WorkPilot/support" class="btn primary">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-veil" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="panel">
+            <div class="kicker"><span class="kdot"></span>Structured execution for real operations</div>
+            <h1>Operations, documented. Execution, repeatable.</h1>
+            <p class="sub">
+              <strong>WorkPilot OS</strong> is an <strong>iOS</strong> operations platform designed for disciplined execution and operational clarity.
+              Keep locations organized, log service visits, track expenses, set reminders, and maintain export-ready records — without clutter.
+            </p>
+
+            <div class="cta-row">
+              <!-- Replace href with your App Store listing URL once live -->
+              <a class="appstore-badge" href="https://apps.apple.com/" aria-label="Download on the App Store">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M16.5 13.2c.03 2.96 2.6 3.95 2.62 3.96-.02.07-.41 1.41-1.36 2.79-.82 1.19-1.67 2.38-3.01 2.4-1.32.02-1.75-.79-3.27-.79-1.51 0-1.99.77-3.24.81-1.29.05-2.28-1.29-3.11-2.48-1.7-2.46-3-6.95-1.25-9.98.87-1.5 2.41-2.45 4.09-2.48 1.28-.02 2.49.87 3.27.87.77 0 2.22-1.07 3.74-.91.64.03 2.45.26 3.61 1.96-.09.06-2.16 1.26-2.14 3.75Z" fill="rgba(255,255,255,.92)"></path>
+                  <path d="M15.5 3.6c.69-.83 1.16-1.99 1.03-3.15-1 .04-2.2.67-2.91 1.5-.64.74-1.2 1.94-1.05 3.08 1.12.09 2.24-.57 2.93-1.43Z" fill="rgba(255,255,255,.80)"></path>
+                </svg>
+                Download on the App Store
+              </a>
+
+              <a class="btn ghost" href="#what">See what it includes</a>
+              <a class="btn primary" href="https://thriveks.com/WorkPilot/support">Get support</a>
+            </div>
+
+            <div class="meta-row">
+              <span class="pill" title="Platform">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 7h10v10H7V7Z" stroke="rgba(237,242,255,.75)" stroke-width="1.8"></path>
+                  <path d="M4 10V7a3 3 0 0 1 3-3h3" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linecap="round"></path>
+                  <path d="M20 14v3a3 3 0 0 1-3 3h-3" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linecap="round"></path>
+                </svg>
+                Built for iOS
+              </span>
+              <span class="pill" title="Tone">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4Z" stroke="rgba(237,242,255,.75)" stroke-width="1.8"></path>
+                </svg>
+                Professional, disciplined
+              </span>
+              <span class="pill" title="Output">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M8 7h12M8 12h12M8 17h12" stroke="rgba(237,242,255,.75)" stroke-width="1.8" stroke-linecap="round"></path>
+                  <path d="M4 7h.01M4 12h.01M4 17h.01" stroke="rgba(237,242,255,.55)" stroke-width="3" stroke-linecap="round"></path>
+                </svg>
+                Export-ready records
+              </span>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="card">
+              <h3>Built to replace “mental tracking”</h3>
+              <p>
+                WorkPilot OS turns operational reality into structured records: locations, visits, expenses, reminders, and exports.
+                That structure is what scales teams.
+              </p>
+              <ul class="list">
+                <li><span class="dot"></span><span>Clear organization across multiple locations</span></li>
+                <li><span class="dot"></span><span>Repeatable visit logging for consistency</span></li>
+                <li><span class="dot"></span><span>Expense capture tied to operations</span></li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Support when you need it</h3>
+              <p>
+                Documentation and help live here:
+                <a href="https://thriveks.com/WorkPilot/support">thriveks.com/WorkPilot/support</a>
+              </p>
+              <div class="cta-row" style="margin-top:12px">
+                <a class="btn primary" href="https://thriveks.com/WorkPilot/support">Open Support</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="wrap">
+        <p class="section-title">What it does</p>
+        <p class="section-lead">
+          WorkPilot OS is designed around the operational primitives that actually matter: places, visits, costs, reminders, and clean output.
+          It’s not trying to be everything — it’s built to be dependable.
+        </p>
+
+        <div class="grid3">
+          <div class="feature">
+            <div class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11Z" stroke="rgba(237,242,255,.85)" stroke-width="1.8"></path>
+                <path d="M12 11.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="rgba(237,242,255,.55)" stroke-width="1.8"></path>
+              </svg>
+            </div>
+            <h4>Locations</h4>
+            <p>Keep operations grounded in real places — so every record has context and history.</p>
+          </div>
+
+          <div class="feature">
+            <div class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M8 7h8M8 11h8M8 15h5" stroke="rgba(237,242,255,.85)" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M6 3h12a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2-3-2V5a2 2 0 0 1 2-2Z" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <h4>Service visits</h4>
+            <p>Log what happened, when, and why. Build repeatable execution through documented visits.</p>
+          </div>
+
+          <div class="feature">
+            <div class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 1v22" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M17 5.5c0-1.93-2.24-3.5-5-3.5s-5 1.57-5 3.5S9.24 9 12 9s5 1.57 5 3.5S14.76 16 12 16s-5 1.57-5 3.5S9.24 23 12 23s5-1.57 5-3.5" stroke="rgba(237,242,255,.85)" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <h4>Expenses</h4>
+            <p>Track operational costs with clean history — so decisions aren’t made blind.</p>
+          </div>
+
+          <div class="feature">
+            <div class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 8v5l3 2" stroke="rgba(237,242,255,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M21 12a9 9 0 1 1-9-9" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M21 3v6h-6" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <h4>Reminders</h4>
+            <p>Support consistent execution by turning routines into scheduled prompts.</p>
+          </div>
+
+          <div class="feature">
+            <div class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17l10-10" stroke="rgba(237,242,255,.85)" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M8 7h9v9" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <h4>Export-ready</h4>
+            <p>Keep data structured so it can be exported, reported, or operationalized later.</p>
+          </div>
+
+          <div class="feature">
+            <div class="ico" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="rgba(237,242,255,.85)" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M7 6v12" stroke="rgba(237,242,255,.55)" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <h4>Structured system</h4>
+            <p>WorkPilot OS is intentionally opinionated: clarity first, clutter last.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="who">
+      <div class="wrap">
+        <p class="section-title">Who it’s for</p>
+        <p class="section-lead">
+          WorkPilot OS is built for operators who need discipline and repeatability — especially across multiple locations or recurring service routines.
+        </p>
+
+        <div class="grid3">
+          <div class="feature">
+            <h4>Field operations</h4>
+            <p>Service routes, maintenance schedules, site checks, recurring operational work.</p>
+          </div>
+          <div class="feature">
+            <h4>Multi-location businesses</h4>
+            <p>Structured location history, visit cadence, and consistent operational records.</p>
+          </div>
+          <div class="feature">
+            <h4>Owner-operators</h4>
+            <p>When the business runs on you, structure is leverage. WorkPilot OS makes that real.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="wrap">
+        <p class="section-title">Why it’s different</p>
+        <p class="section-lead">
+          Most tools are built around “tasks.” WorkPilot OS is built around <strong>operations</strong> — locations, visits, costs, and repeatability.
+          That is the difference between being busy and being in control.
+        </p>
+
+        <div class="grid3">
+          <div class="feature">
+            <h4>Operational primitives</h4>
+            <p>Instead of generic lists, it focuses on the real building blocks teams execute against.</p>
+          </div>
+          <div class="feature">
+            <h4>Discipline by design</h4>
+            <p>Clear structure reduces ambiguity and improves consistency across repeat work.</p>
+          </div>
+          <div class="feature">
+            <h4>Built to scale</h4>
+            <p>Structured records now create reporting, automation, and accountability later.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="wrap">
+        <div class="download">
+          <div>
+            <strong>Download WorkPilot OS for iOS</strong>
+            <span>
+              Available on the App Store. If you need help, visit
+              <a href="https://thriveks.com/WorkPilot/support">WorkPilot Support</a>.
+            </span>
+          </div>
+
+          <!-- Replace href with your App Store listing URL once live -->
+          <a class="appstore-badge" href="https://apps.apple.com/" aria-label="Download WorkPilot OS on the App Store">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M16.5 13.2c.03 2.96 2.6 3.95 2.62 3.96-.02.07-.41 1.41-1.36 2.79-.82 1.19-1.67 2.38-3.01 2.4-1.32.02-1.75-.79-3.27-.79-1.51 0-1.99.77-3.24.81-1.29.05-2.28-1.29-3.11-2.48-1.7-2.46-3-6.95-1.25-9.98.87-1.5 2.41-2.45 4.09-2.48 1.28-.02 2.49.87 3.27.87.77 0 2.22-1.07 3.74-.91.64.03 2.45.26 3.61 1.96-.09.06-2.16 1.26-2.14 3.75Z" fill="rgba(255,255,255,.92)"></path>
+              <path d="M15.5 3.6c.69-.83 1.16-1.99 1.03-3.15-1 .04-2.2.67-2.91 1.5-.64.74-1.2 1.94-1.05 3.08 1.12.09 2.24-.57 2.93-1.43Z" fill="rgba(255,255,255,.80)"></path>
+            </svg>
+            Download on the App Store
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div>© <span id="y">2026</span> MTA Trading LLC. All rights reserved.</div>
+      <div>
+        <a href="https://thriveks.com/WorkPilot/support">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+
+</body></html>
