@@ -1,7 +1,7 @@
 (function(){
 "use strict";
 var ENDPOINT="https://thriveks-bluestem-watch.thriveks.workers.dev/status";
-var ALLOWED=new Set(["bluestemdatacenter.com","files.leavenworthcounty.gov","citizenportal.ai","www.citizenportal.ai"]);
+var ALLOWED=new Set(["bluestemdatacenter.com","files.leavenworthcounty.gov","citizenportal.ai","www.citizenportal.ai","www.youtube.com","youtube.com"]);
 function txt(parent,tag,value,cls){
   var el=document.createElement(tag);
   if(cls)el.className=cls;
