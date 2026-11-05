@@ -84,15 +84,21 @@
 .v9-bottom-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(42px,6vw,90px)}
 .v9-bottom-feature h2{font-size:clamp(42px,4.6vw,64px);line-height:1.1;color:#153d34;margin:0 0 20px;font-weight:600}
 .v9-bottom-feature .v9-bottom-grid>div:first-child>p:not(.v9-overline){font-size:16px;line-height:1.73;color:#547063;margin:0 0 27px;max-width:460px}
-.v9-bottom-tiles{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:center}
-.v9-insight-tile{display:flex;flex-direction:column;gap:13px;background:#fff;padding:12px;border:1px solid var(--v9-border);border-radius:12px;box-shadow:0 15px 30px #103d3410;transition:transform .25s}
-.v9-insight-tile:first-child{transform:translateY(21px)}
-.v9-insight-tile:hover{transform:translateY(-4px)}
-.v9-insight-tile:first-child:hover{transform:translateY(15px)}
-.v9-insight-tile img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:6px}
-.v9-insight-tile span{color:#255c4b;font-size:12px;font-weight:700;padding:0 6px 5px}
-.v9-will-reveal{opacity:0;transform:translateY(19px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.65,.2,1)}
-.v9-will-reveal.v9-is-visible{opacity:1;transform:translateY(0)}
+/* Community illustrations have bounded geometry and no replaced-image sizing. */
+.community-paths{display:grid;grid-template-columns:1fr;gap:20px;min-width:0}
+.community-path{display:grid;grid-template-columns:150px minmax(0,1fr);align-items:stretch;background:#fff;border:1px solid #ccddce;border-radius:12px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.community-path:hover{border-color:#438369;box-shadow:0 8px 24px #153d3410}
+.community-path-art{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 12px;color:#28694f;background:#dcebcf;min-width:0}
+.community-path-art-people{background:#e3eeeb;color:#316e63}
+.community-path-art svg{display:block;width:100%;height:auto;aspect-ratio:360/150;fill:currentColor}
+.community-path-art>span{font:700 8px/1.7 var(--text);letter-spacing:.09em;text-align:center;margin-top:16px}
+.community-path-copy{padding:24px;min-width:0}
+.community-path-copy .v9-overline{font-size:9px;letter-spacing:.08em}
+.community-path h3{font:700 24px/1.15 var(--display);letter-spacing:-.035em;color:#153d34;margin:10px 0}
+.community-path p{font-size:14px;line-height:1.6;color:#53695c;margin:0 0 18px}
+.community-path-link{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:700;color:#255c4b}
+.community-path-link b{font-size:18px}
+
 /* The work page uses the same working preview carousel as the homepage. */
 #main-content>.v9-portfolio{border-top:0}
 .v9-home .v9-portfolio{border:0}
@@ -115,7 +121,7 @@
 .v9-carousel-footer{flex-wrap:wrap;gap:13px}.v9-carousel-context{display:none}.v9-all-work{margin-left:0}
 .v9-services{padding:72px 0}.v9-services-intro{display:block}.v9-services-intro>p{margin-top:20px}
 .v9-service-grid{grid-template-columns:1fr;gap:14px}.v9-service-card{min-height:0;padding:26px}.v9-service-mark{margin:18px 0}
-.v9-bottom-grid{grid-template-columns:1fr;gap:34px}.v9-bottom-tiles{max-width:560px}
+.v9-bottom-grid{grid-template-columns:1fr;gap:34px}.community-paths{max-width:680px}
 }
 @media(max-width:620px){
 .v9-hero h1{font-size:clamp(41px,10vw,56px)}
@@ -124,12 +130,11 @@
 .v9-screen img{aspect-ratio:1160/760}.v9-project-copy h3{font-size:26px}
 .v9-portfolio .container{padding-left:21px;padding-right:21px}
 .v9-services-intro h2{font-size:clamp(37px,9vw,51px)}
-.v9-bottom-tiles{gap:11px}.v9-insight-tile{padding:9px}.v9-insight-tile span{font-size:11px}
+.community-path{grid-template-columns:1fr}.community-path-art{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}.community-path-art svg{max-width:180px}.community-path-art>span{margin:0;font-size:9px}.community-path-copy{padding:23px}
 }
 @media(prefers-reduced-motion:reduce){
 .v9-ticker-moving{animation:none!important;transform:none!important}
-.v9-will-reveal{opacity:1!important;transform:none!important;transition:none!important}
-.v9-project-card,.v9-service-card,.v9-button,.v9-insight-tile,.v9-screen img{transition:none!important}
+.v9-project-card,.v9-service-card,.v9-button,.v9-screen img{transition:none!important}
 .v9-carousel{scroll-behavior:auto!important}
 }
 /* White navigation requires a dark mobile menu glyph. */

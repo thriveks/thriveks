@@ -26,12 +26,12 @@
       --radius: 18px;
       --radius2: 22px;
       --max: 1120px;
-      --logo: url("/favicon.svg");
+      --logo: none;
       --ease: cubic-bezier(.2,.8,.2,1);
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html{min-height:100%}body{min-height:100vh}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -177,13 +177,10 @@
     }
     .btn:active{ transform: translateY(1px); }
     .btn.primary{
-      background: rgba(255,255,255,.14);
-      border-color: rgba(255,255,255,.18);
+      background:#dbe8ff;color:#11223a;cursor:pointer;
+      border-color:#dbe8ff;
     }
-    .btn.primary:hover{
-      background: rgba(255,255,255,.18);
-      border-color: rgba(255,255,255,.22);
-    }
+    .btn.primary:hover{background:#fff;border-color:#fff}
     .btn.ghost{
       background: rgba(0,0,0,.20);
     }
@@ -504,7 +501,7 @@
       }
     }
   </style>
-<meta name="robots" content="noindex,nofollow"></head>
+<meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/credit.css"></head>
 
 <body>
   <header>
@@ -772,7 +769,7 @@
         <a href="/WorkPilot/support">Support</a>
       </div>
     </div>
-  </footer>
+  <p class="thrive-site-credit">Website Designed &amp; Powered by <a href="/"><strong>ThriveKS</strong></a></p></footer>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();

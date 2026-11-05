@@ -1,10 +1,6 @@
 (()=>{'use strict';
 function init(){
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduced&&'IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('v9-is-visible');observer.unobserve(entry.target)}})},{threshold:.1,rootMargin:'0px 0px -25px 0px'});
-    document.querySelectorAll('[data-reveal]').forEach(el=>{el.classList.add('v9-will-reveal');observer.observe(el)});
-  }
   document.querySelectorAll('[data-reel]').forEach(section=>{
     const viewport=section.querySelector('[data-reel-track]');
     const slides=[...section.querySelectorAll('[data-reel-card]')];

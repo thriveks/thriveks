@@ -4,17 +4,17 @@ html{scroll-padding-top:110px}
 :where([id]){scroll-margin-top:110px}
 .header .container{position:relative;height:88px;gap:24px}
 .header .nav{gap:16px;position:static}
-.header .nav>a,.nav-group>summary{font:700 13px/1.4 var(--text);color:var(--nav-ink)}
+.header .nav>a,.nav-group>.nav-toggle{font:700 13px/1.4 var(--text);color:var(--nav-ink)}
 .header .nav>a{min-height:44px;display:flex;align-items:center}
-.nav-group{position:static}
-.nav-group>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:7px;padding:13px 0;border-bottom:2px solid transparent;min-height:44px}
-.nav-group>summary::-webkit-details-marker{display:none}
-.nav-group>summary:hover,.nav-group[open]>summary,.nav-group.is-current>summary{color:#206d53;border-bottom-color:#31856c}
-.nav-group>summary:focus-visible{outline:3px solid #497bff;outline-offset:4px;border-radius:3px}
+.nav-group{position:static}.nav-toggle{width:100%}
+.nav-group>.nav-toggle{appearance:none;background:none;border:0;border-radius:0;text-align:left;cursor:pointer;display:flex;align-items:center;gap:7px;padding:13px 0;border-bottom:2px solid transparent;min-height:44px}
+
+.nav-group>.nav-toggle:hover,.nav-group.is-open>.nav-toggle,.nav-group.is-current>.nav-toggle{color:#206d53;border-bottom-color:#31856c}
+.nav-group>.nav-toggle:focus-visible{outline:3px solid #497bff;outline-offset:4px;border-radius:3px}
 .nav-chevron{font-size:17px;line-height:1;transition:transform .2s}
-.nav-group[open] .nav-chevron{transform:rotate(180deg)}
+.nav-group.is-open .nav-chevron{transform:rotate(180deg)}
 .nav-panel{position:absolute;top:calc(100% - 1px);right:48px;left:48px;display:grid;grid-template-columns:.8fr 1.4fr;gap:40px;padding:32px;border:1px solid var(--nav-line);border-top:3px solid #31856c;border-radius:0 0 14px 14px;background:#fff;box-shadow:0 22px 40px #113d3224;color:var(--nav-ink)}
-.nav-group:not([open])>.nav-panel{display:none}
+.nav-panel[hidden]{display:none!important}
 .nav-panel-intro{padding:8px 28px 8px 5px;border-right:1px solid var(--nav-line)}
 .nav-kicker{display:block;font:700 10px/1.5 var(--text);letter-spacing:.14em;color:#477761;margin-bottom:14px}
 .nav-panel-intro>strong{display:block;font:700 clamp(24px,2.5vw,35px)/1.1 var(--display);letter-spacing:-.045em;max-width:340px}
@@ -62,7 +62,7 @@ html{scroll-padding-top:110px}
  .header .container{height:74px}.header .menu-button{display:flex;color:#174f3f;background:#fff;border:1px solid #b7c9bd;border-radius:6px;line-height:1}
  .header .nav{display:none;position:absolute;left:0;right:0;top:100%;padding:16px 24px 24px;background:#fff;max-height:calc(100dvh - 74px);overflow-y:auto;overscroll-behavior:contain;box-shadow:0 18px 30px #0c352a1f;border-bottom:1px solid var(--nav-line)}
  .header .nav.open{display:block}.header .nav>a{padding:15px 8px;font-size:15px;border-bottom:1px solid var(--nav-line)}
- .nav-group{border-bottom:1px solid var(--nav-line)}.nav-group>summary{justify-content:space-between;font-size:16px;padding:17px 8px;border-bottom:0}
+ .nav-group{border-bottom:1px solid var(--nav-line)}.nav-group>.nav-toggle{justify-content:space-between;font-size:16px;padding:17px 8px;border-bottom:0}
  .nav-panel{position:static;display:block;padding:8px 8px 18px;border:0;box-shadow:none;background:#f4f8f0;border-radius:8px;margin-bottom:12px}
  .nav-panel-intro{padding:13px 12px 8px;border:0}.nav-kicker{margin-bottom:8px}.nav-panel-intro>strong{font-size:24px;max-width:none}.nav-panel-intro p{max-width:none;font-size:13px;margin-top:8px}
  .nav-panel-links{gap:0;grid-template-columns:1fr 1fr}.header .nav .nav-panel a{padding:12px;min-height:74px}.nav-panel a>span{font-size:14px}
@@ -81,4 +81,7 @@ html{scroll-padding-top:110px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.nav-chevron{transition:none}.v9-project-card:hover,.v9-service-card:hover,.v9-button:hover,.v9-insight-tile:hover{transform:none}}
 
 /* Keep the expanded mobile navigation clear of the floating assistant. */
-@media(max-width:1100px){body:has(#site-nav.open) #assistant-launcher{visibility:hidden}}
+@media(max-width:1100px){body.navigation-open #assistant-launcher,body.navigation-open #assistant-panel{visibility:hidden}}
+
+/* A menu always takes priority over the assistant, including an already open panel. */
+body.navigation-open .assistant,body.navigation-open .assistant-launcher{visibility:hidden}

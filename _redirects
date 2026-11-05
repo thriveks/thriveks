@@ -8,10 +8,38 @@
 /first-city-museum/* https://thriveks.neocities.org/first-city-museum/:splat 302
 /blingequalsdreams/* https://thriveks.neocities.org/blingequalsdreams/:splat 302
 /7thStreetFeast/* https://thriveks.neocities.org/7thStreetFeast/:splat 302
-/leavenworth-county-data-center-information/leavenworth-county-data-center-concept.png https://thriveks.neocities.org/leavenworth-county-data-center-information/leavenworth-county-data-center-concept.png 302
+/leavenworth-county-data-center-information/leavenworth-county-data-center-concept.png /assets/data-center-concept.jpg 302
 # Legacy project page entry points now lead to modern site content
 /midnightauto/home /work#midnightauto 302
 /kansascityspiritfestival/home /showcase 302
 /leavenworthclaw /work#leavenworth-claw 302
 /goodshepherd/ https://goodshepherdhomesystem.com/ 302
 /goodshepherd https://goodshepherdhomesystem.com/ 302
+
+# Archived templates resolve to maintained same-origin content.
+/legacy-archive/2026-11-03/home / 302
+/legacy-archive/2026-11-03/home.html / 302
+/legacy-archive/2026-11-03/apps /apps 302
+/legacy-archive/2026-11-03/apps.html /apps 302
+/legacy-archive/2026-11-03/volunteer /volunteer 302
+/legacy-archive/2026-11-03/volunteer.html /volunteer 302
+/legacy-archive/2026-11-03/business /business 302
+/legacy-archive/2026-11-03/business.html /business 302
+/legacy-archive/2026-11-03/board /board 302
+/legacy-archive/2026-11-03/board.html /board 302
+/legacy-archive/2026-11-03/sponsor /sponsor 302
+/legacy-archive/2026-11-03/sponsor.html /sponsor 302
+/legacy-archive/2026-11-03/workpilot-home /WorkPilot/home 302
+/legacy-archive/2026-11-03/workpilot-home.html /WorkPilot/home 302
+/legacy-archive/2026-11-03/workpilot-support /WorkPilot/support 302
+/legacy-archive/2026-11-03/workpilot-support.html /WorkPilot/support 302
+/legacy-archive/2026-11-03/codecompanion-home /CodeCompanion/home 302
+/legacy-archive/2026-11-03/codecompanion-home.html /CodeCompanion/home 302
+/legacy-archive/2026-11-03/codecompanion-support /CodeCompanion/support 302
+/legacy-archive/2026-11-03/codecompanion-support.html /CodeCompanion/support 302
+/legacy-archive/2026-11-03/codecompanion-privacy /CodeCompanion/privacy 302
+/legacy-archive/2026-11-03/codecompanion-privacy.html /CodeCompanion/privacy 302
+/legacy-archive/2026-11-03/data-center-record /leavenworth-county-data-center-information/ 302
+/legacy-archive/2026-11-03/data-center-record.html /leavenworth-county-data-center-information/ 302
+/legacy-archive/2026-11-03/data-center-source-library /leavenworth-county-data-center-information/LeavenworthCountyDataCenterSourceLibrary 302
+/legacy-archive/2026-11-03/data-center-source-library.html /leavenworth-county-data-center-information/LeavenworthCountyDataCenterSourceLibrary 302
