@@ -889,3 +889,59 @@ body{background:var(--fresh-paper);color:var(--fresh-ink);font-size:16px;line-he
 .footer-cta{padding:60px 0}}
 @media(max-width:370px){.fresh-hero h1{font-size:42px}.fresh-credentials span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.fresh-button,.fresh-service,.fresh-project,.fresh-project-visual img{transition:none}}
+
+
+/* Premium brand identity: intentionally replaces cropped collage banner. */
+:root{--fresh-ink:#103b34;--fresh-green:#266e57;--fresh-paper:#fcfcf8}
+.header{background:#fff;box-shadow:0 2px 18px rgba(17,60,45,.035)}
+.fresh-hero{background:linear-gradient(135deg,#fcfcf8 0%,#f0f5ef 100%);padding:105px 0 100px;overflow:hidden}
+.fresh-hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(35px,5.5vw,84px)}
+.fresh-hero-copy{position:relative;z-index:2}
+.fresh-hero h1{font-size:clamp(52px,5.9vw,83px);line-height:1.035;letter-spacing:-.065em;max-width:700px;font-weight:600}
+.fresh-hero h1 em{font-style:normal;color:#328165}
+.fresh-lede{font-size:clamp(18px,1.6vw,21px);line-height:1.72;max-width:570px}
+.fresh-button{border-radius:5px;min-height:54px}
+.fresh-credentials{border:0;background:#163e36}
+.fresh-credentials span{color:#d9e8dc}
+.fresh-credentials span+span:before{color:#6b9981}
+.thrive-stage{aspect-ratio:4/4.6;min-height:420px;max-height:600px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;position:relative;border:1px solid #1a514a;background:radial-gradient(circle at 70% 38%,#34715e 0%,#1e554a 42%,#103b34 75%);border-radius:8px;color:#f6f7e9;box-shadow:0 35px 75px #143b321a}
+.thrive-stage:before{content:'';position:absolute;inset:0;background-image:linear-gradient(#f5fff308 1px,transparent 1px),linear-gradient(90deg,#f5fff308 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 80%,transparent)}
+.thrive-stage-top,.thrive-stage-bottom{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:33px}
+.thrive-stage-top>span:last-child{font:600 9px var(--mono);letter-spacing:.09em;color:#d6e8d8;text-align:right}
+.thrive-stage-name{font:700 19px var(--display);letter-spacing:-.07em}.thrive-stage-name span{color:#d4f1a9}
+.thrive-stage-art{position:absolute;inset:65px 15px 75px;display:grid;place-items:center}
+.thrive-stage-orbit{position:absolute;border:1px solid #c8e8c04d;border-radius:50%;aspect-ratio:1;width:75%;transform:rotate(-17deg)}
+.thrive-stage-orbit.orbit-one{width:93%;border-style:dashed;border-color:#bde1ab38}
+.thrive-stage-orbit.orbit-two{width:68%;border-width:2px}
+.thrive-stage-sun{position:absolute;background:#dbefab;box-shadow:0 0 100px #c9eaa944;width:55%;aspect-ratio:1;border-radius:50%;transform:translate(24%,-20%);z-index:1}
+.thrive-stage-letter{position:relative;z-index:2;font:600 clamp(165px,23vw,295px)/.8 var(--display);letter-spacing:-.18em;color:#163e34;text-shadow:12px 15px 0 #143a3318;transform:translateX(-20px)}
+.thrive-stage-letter span{color:#f1f6e0;opacity:.92;position:relative;left:-.23em;font-weight:400}
+.thrive-stage-bottom{align-items:end;font:600 clamp(20px,2.1vw,29px)/1.18 var(--display);letter-spacing:-.04em}
+.thrive-stage-seal{display:flex;align-items:end;gap:10px;font:700 10px/1.15 var(--mono);letter-spacing:.06em;color:#cde5c7}
+.thrive-stage-seal b{font:400 24px var(--display)}
+.fresh-section{padding:104px 0}
+.fresh-section-head{margin-bottom:40px}
+.fresh-section-head h2{font-size:clamp(40px,4.4vw,58px)}
+.fresh-service{padding-top:32px;padding-bottom:32px}
+.fresh-projects{gap:27px}
+.fresh-project{border-radius:8px}
+.fresh-project-visual{height:260px;background:#ede7e4;padding:21px 23px 0;align-items:end}
+.fresh-project-museum{background:#e2e9e9}
+.fresh-browser{width:min(100%,440px);height:100%;border:1px solid #d5dad3;border-bottom:0;border-radius:9px 9px 0 0;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 30px #152f3624;background:#fff}
+.fresh-browser-toolbar{height:33px;background:#fbfaf7;display:flex;align-items:center;gap:5px;padding:0 12px;border-bottom:1px solid #ebebe5;flex:none}
+.fresh-browser-toolbar i{display:block;width:6px;height:6px;background:#c6ccc7;border-radius:50%}
+.fresh-browser-toolbar small{margin-left:auto;margin-right:auto;font:600 9px/1.1 var(--mono);letter-spacing:.035em;color:#617c72}
+.fresh-browser-page{display:flex;flex:1;min-height:0;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;background:#f7e9e8}
+.fresh-browser-page-museum{background:#e8eee7}
+.fresh-browser-page img{height:auto;max-height:110px;max-width:70%;object-fit:contain;transform:none}
+.fresh-browser-page .fresh-browser-caption{font:600 9px/1.1 var(--mono);letter-spacing:.13em;color:#765c62}
+.fresh-browser-page-museum .fresh-browser-caption{color:#536e68}
+.fresh-project-visual:hover .fresh-browser-page img{transform:scale(1.04)}
+.fresh-project-copy{padding:33px 36px 37px}
+.directory-wordmark{font:700 22px/1.12 var(--display);color:#205449;text-align:center;letter-spacing:-.045em}
+.page-hero,.page-hero.blue,.page-hero.orange,.page-hero.white{background:linear-gradient(120deg,#f7faf6,#edf4eb);padding:105px 0 95px}
+.page-hero h1{max-width:900px;font-size:clamp(53px,6.8vw,91px)}
+.footer-cta{background:#e3eee1}.footer{background:#113c35}
+@media(max-width:960px){.fresh-hero{padding:75px 0}.thrive-stage{min-height:360px}.thrive-stage-top,.thrive-stage-bottom{padding:23px}.thrive-stage-letter{font-size:clamp(150px,22vw,230px)}}
+@media(max-width:760px){.fresh-hero{padding:52px 0 60px}.fresh-hero-grid{gap:36px}.fresh-hero h1{font-size:clamp(48px,11vw,70px)}.thrive-stage{aspect-ratio:5/4;min-height:0;max-height:none}.thrive-stage-art{inset:25px 20px}.thrive-stage-top,.thrive-stage-bottom{padding:20px}.thrive-stage-letter{font-size:clamp(140px,40vw,230px)}.thrive-stage-bottom{font-size:21px}.thrive-stage-name{font-size:16px}.fresh-credentials span{font-size:10px}.fresh-credentials{padding:4px 0}.fresh-project-visual{height:215px}.fresh-project-copy{padding:24px}}
+@media(max-width:380px){.thrive-stage-top>span:last-child{font-size:7px}.thrive-stage-seal{font-size:8px}}
