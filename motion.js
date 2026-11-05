@@ -12,8 +12,14 @@ function init(){
     let selected=0,direction=1,userPaused=reduced,visible=!('IntersectionObserver' in window),hovered=false,focused=false,timer=null,scrolling=false,frame=0;
     function countVisible(){
       if(slides.length<2)return 1;
-      const gap=slides[1].offsetLeft-slides[0].offsetLeft-slides[0].offsetWidth;
-      return Math.max(1,Math.min(slides.length,Math.round((viewport.clientWidth+gap)/(slides[0].offsetWidth+gap))));
+      const width=slides[0].offsetWidth;
+      const gap=Math.max(0,slides[1].offsetLeft-slides[0].offsetLeft-width);
+      const stride=width+gap;
+      // During stylesheet loading or breakpoint changes, layout may briefly be zero.
+      // Never let a non-finite count become a slide index or destroy the controls.
+      if(stride<=0||viewport.clientWidth<=0)return 1;
+      const count=Math.round((viewport.clientWidth+gap)/stride);
+      return Number.isFinite(count)?Math.max(1,Math.min(slides.length,count)):1;
     }
     function maxStart(){return Math.max(0,slides.length-countVisible())}
     function mark(){[...dots.children].forEach((b,i)=>{b.classList.toggle('v9-current',i===selected);b.setAttribute('aria-current',i===selected?'true':'false')})}
@@ -61,7 +67,10 @@ function init(){
         selected=best;mark();
       })
     },{passive:true});
-    window.addEventListener('resize',()=>{rebuildDots();jump(selected,false);run()},{passive:true});
+    function refresh(){rebuildDots();jump(selected,false);run()}
+    window.addEventListener('resize',refresh,{passive:true});
+    window.addEventListener('load',refresh,{once:true});
+    if('ResizeObserver' in window)new ResizeObserver(refresh).observe(viewport);
     rebuildDots();paintToggle();run();
   });
 }
