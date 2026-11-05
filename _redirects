@@ -2,16 +2,16 @@
 /websiteimagesandvideos/* https://thriveks.neocities.org/websiteimagesandvideos/:splat 302
 /boardmembers/* https://thriveks.neocities.org/boardmembers/:splat 302
 /Thrive/partners/* https://thriveks.neocities.org/Thrive/partners/:splat 302
-/goodshepherd/* https://thriveks.neocities.org/goodshepherd/:splat 302
+/goodshepherd/* https://goodshepherdhomesystem.com/ 302
 /kansascityspiritfestival/assets/* https://thriveks.neocities.org/kansascityspiritfestival/assets/:splat 302
 /midnightauto/photos/* https://thriveks.neocities.org/midnightauto/photos/:splat 302
 /first-city-museum/* https://thriveks.neocities.org/first-city-museum/:splat 302
 /blingequalsdreams/* https://thriveks.neocities.org/blingequalsdreams/:splat 302
 /7thStreetFeast/* https://thriveks.neocities.org/7thStreetFeast/:splat 302
 /leavenworth-county-data-center-information/leavenworth-county-data-center-concept.png https://thriveks.neocities.org/leavenworth-county-data-center-information/leavenworth-county-data-center-concept.png 302
-# Keep project pages reachable until each has an independent canonical home
-/midnightauto/home https://thriveks.neocities.org/midnightauto/home 302
-/kansascityspiritfestival/home https://thriveks.neocities.org/kansascityspiritfestival/home 302
-/leavenworthclaw https://thriveks.neocities.org/leavenworthclaw 302
+# Legacy project page entry points now lead to modern site content
+/midnightauto/home /work#midnightauto 302
+/kansascityspiritfestival/home /showcase 302
+/leavenworthclaw /work#leavenworth-claw 302
 /goodshepherd/ https://goodshepherdhomesystem.com/ 302
 /goodshepherd https://goodshepherdhomesystem.com/ 302
