@@ -23,6 +23,7 @@ Reference: https://midwesthorizons.com/ . Also visited its Signature Websites pa
 - Kept the original banner file and its full 2:1 dimensions; no crop, replacement, zoom, or image processing.
 - Kept all six project previews and the existing autoplay, manual next/previous, dots, pause, hover/focus pause, offscreen behavior, and reduced-motion logic. Enlarged dot targets and gave moving cards vertical breathing room.
 - Hid the floating assistant launcher only while mobile navigation is expanded so it cannot cover menu choices. The assistant itself is unchanged.
+- Removed the outbound action on the existing MTA Trading directory entry after its public profile returned HTTP 404. Preserved the name, logo, and separate-venture classification, with a clear unavailable label.
 - Corrected an existing duplicated App Store path on the Apps page using the already-correct WorkPilot page destination.
 - Build includes the new isolated `polish.css` refinement layer. Original styles and motion logic remain available at the rollback commit.
 
@@ -45,3 +46,7 @@ Commit: `bdda78c413b2c70bff0e485afa9c81d0af9c1dc4`
 Previous successful staging deployment: `26df9e3f-39ce-4235-af61-0aadc9e08a46`, https://26df9e3f.thriveks-v8-staging.pages.dev .
 
 Cloudflare calls this project's canonical branch deployment “production”; that label applies only to this separate staging project and does not mean the live ThriveKS production website was modified.
+
+## Public deployment checks
+
+Initial staging deployment succeeded at commit `ad4b269d62455f14ff74db6e56cf1c4b45be37ed`. Public homepage loaded the new styles, all five menus, original banner, and six projects. Checked 65 public destinations: all staging page/asset destinations passed, with no Neocities redirects. MTA Trading returned 404 and was unlinked in the follow-up. Census QuickFacts and KDOT returned 403 to the automated client; retained these official-source links and do not claim their content was verified. Screenshots and the complete HTTP results are stored in the workspace `qa` folder.
