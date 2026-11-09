@@ -12,7 +12,7 @@
 # Legacy project page entry points now lead to modern site content
 /midnightauto/home /work#midnightauto 302
 /kansascityspiritfestival/home /showcase 302
-/leavenworthclaw /work#leavenworth-claw 302
+/leavenworthclaw /work 302
 /goodshepherd/ https://goodshepherdhomesystem.com/ 302
 /goodshepherd https://goodshepherdhomesystem.com/ 302
 
